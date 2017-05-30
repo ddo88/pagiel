@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  .demo.container
+    .row
+      .col-md-6
+        .form-group
+          label Canciones
+          select(id="required",multiple="multiple")
+        button(data-bind="click:function(){buscar();}") Buscar
+
+  div(id="list")
+    table.table.table-striped
+      thead
+        tr
+          th
+            span Nombre
+          th
+            span Tipo
+      tbody(data-bind='foreach:files,visible: files().length')
+        tr
+          td(class="custom-tooltip")
+            span(data-bind="text:name")
+            spen(data-bind="text:lyrics",class="custom-tooltip-message",style="display:none;")
+          td
+            span(data-bind="text:tipo")
+            
+    button(data-bind="click:function(){generar();}") Generar
+
+block scripts
+ script(src='/javascripts/list.js')
