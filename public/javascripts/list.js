@@ -1,8 +1,48 @@
+Array.prototype.move = function (old_index, new_index) {
+    while (old_index < 0) {
+        old_index += this.length;
+    }
+    while (new_index < 0) {
+        return;
+        //new_index += this.length;
+    }
+    if (new_index >= this.length) {
+        var k = new_index - this.length;
+        while ((k--) + 1) {
+            this.push(undefined);
+        }
+    }
+    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+    return this; // for testing purposes
+};
 function VM()
 {
     var _self           = this;
+    _self.currentList   = ko.observable();
     _self.files         = ko.observableArray();
     _self.selectedFiles = ko.observable();
+    _self.processPosition= function(item,pos){
+        var temp=_self.files();
+        _.find(temp,function(song,idx){
+            if(item.id()==song.id())
+            {
+                temp.move(idx,(idx+pos));
+                return song;
+            }
+            return false;
+        });
+
+        _self.files([]);
+        _self.files(_.filter(temp),function(song){
+            return song;
+        });
+    }
+    _self.up= function(item){
+       _self.processPosition(item,1);
+    };
+    _self.down= function(item){
+        _self.processPosition(item,-1);
+    };
     _self.buscar        = function(){
         _self.files([]);
         var ids=_self.selectedFiles().value();
@@ -13,11 +53,31 @@ function VM()
         })
      };
      _self.generar=function(){
-
+         var item={ ids: _.chain(_self.files()).map(function(q){ return q.id(); }).reduce(function(memo,current){ return memo+','+current;}).value() };
+         if(_self.currentList()){
+             debugger;
+             item.id=_self.currentList()["_id"];
+            updateItem("/api/lists",item).done(function(data){
+                debugger;
+            })
+         }else
+         {
+            postItem('/api/lists',item).done(function(data){
+                console.log("inserted");
+            });
+         }
      };
     _self.init          = function(){
         _self.files([]);
         _self.selectedFiles($("#required").data("kendoMultiSelect"));
+        get('/api/lists/current').done(function(list){
+            debugger;
+            if(list.length){
+                _self.currentList(list[0]);
+                _self.selectedFiles().value(list[0].Songs);
+                _self.buscar();
+            }
+        });
       };
     _self.init();
     return _self;

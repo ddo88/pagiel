@@ -16,16 +16,25 @@ block content
       thead
         tr
           th
+            span #
+          th
             span Nombre
           th
             span Tipo
+          th 
+            span Position
       tbody(data-bind='foreach:files,visible: files().length')
         tr
+          td
+            span(data-bind="text:$index")
           td(class="custom-tooltip")
             span(data-bind="text:name")
             spen(data-bind="text:lyrics",class="custom-tooltip-message",style="display:none;")
           td
             span(data-bind="text:tipo")
+          td
+            i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){$parent.down($data);}",style="font-size:16px;") &nbsp;&nbsp;
+            i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){$parent.up($data);}",style="font-size:16px;")
             
     button(data-bind="click:function(){generar();}") Generar
 

@@ -48,12 +48,14 @@ function Song(item,parent){
     _self.lyrics = ko.observable();
     _self.chords = ko.observable();
     _self.tipo   = ko.observable();
+    _self.views  = ko.observable();
     function setData(val){
         _self.id(val["_id"]);
         _self.name(val.Name);
         _self.lyrics(val.Lyrics);
         _self.chords(val.Chords);
-        _self.tipo(val.Type)
+        _self.tipo(val.Type);
+        _self.views(val.Views);
      }
     setData(item);
     _self.toItem   =function(){
@@ -62,6 +64,7 @@ function Song(item,parent){
             chords:_self.chords(),
             name:  _self.name(),
             type:  _self.tipo()
+            //views: _self.views()
         }
         if(_self.id())
             obj.id=_self.id();

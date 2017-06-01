@@ -6,17 +6,27 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://nodetest:nodetest@ds030817.mlab.com:30817/alabanza');
 
 // Create a schema
-mongoApi.createSchema=function(){
+mongoApi.createSchemaSong=function(){
     return new mongoose.Schema({
         Name: String,
         Lyrics: String,
         Chords: String,
-        Type:String
+        Type:String,
+        Views:Number
+    });
+};
+mongoApi.createSchemaList=function(){
+    return new mongoose.Schema({
+        Date: Date,
+        // Songs:[{
+        //     ids:String
+        // }]
+        Songs:[]
     });
 };
 // Create a model
-mongoApi.Song= mongoose.model("Song", mongoApi.createSchema());
-
+mongoApi.Song= mongoose.model("Song", mongoApi.createSchemaSong());
+mongoApi.List= mongoose.model("List",mongoApi.createSchemaList());
 
 mongoApi.db=mongoose;
 
