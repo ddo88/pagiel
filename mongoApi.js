@@ -6,6 +6,16 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://nodetest:nodetest@ds030817.mlab.com:30817/alabanza');
 //demo
 // Create a schema
+mongoApi.createSchemaUser=function(){
+    return new mongoose.Schema({
+        google: {
+            id:String,
+            token:String,
+            name :String,
+            email:String
+        }
+    });
+}
 mongoApi.createSchemaSong=function(){
     return new mongoose.Schema({
         Name: String,
@@ -27,6 +37,7 @@ mongoApi.createSchemaList=function(){
 // Create a model
 mongoApi.Song= mongoose.model("Song", mongoApi.createSchemaSong());
 mongoApi.List= mongoose.model("List",mongoApi.createSchemaList());
+mongoApi.User= mongoose.model("User",mongoApi.createSchemaUser());
 
 mongoApi.db=mongoose;
 

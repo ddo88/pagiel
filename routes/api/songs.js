@@ -7,6 +7,12 @@ var router = express.Router();
 var mongodb= require('../../mongoApi.js');
 
 //var dropboxApi = new Dropbox({ accessToken: 'rQbx2WVaCCMAAAAAAAACM1737RJ_TBS3FWn65a9YzGq39MDNqUffbxyk_kgmBBQW' });
+router.get('/', function(req, res, next) {
+     mongodb.Song.find({}).sort({Name:1}).exec(response(res));
+});
+router.get('/:Id', function(req, res) {
+     mongodb.Song.findById(req.params.Id,response(res));
+});
 
 router.post('/',function(req,res,next){
      var obj=getItem(req);
@@ -14,17 +20,19 @@ router.post('/',function(req,res,next){
      var item= new mongodb.Song(obj);
     item.save(response(res));
 });
+
 router.put('/',function(req,res,next){
     var updateItem=getItem(req);
     if(req.body.views)
         updateItem.Views=req.body.views;
     mongodb.Song.findOneAndUpdate({"_id":req.body.id},updateItem,response(res)) 
 });
-router.get('/', function(req, res, next) {
-     mongodb.Song.find({}).sort({Name:1}).exec(response(res));
+router.put('/:Id', function(req, res) {
+     mongodb.Song.findOneAndUpdate({"_id":req.params.Id},{ $inc: { "Views" : 1 } },response(res));
 });
-router.get('/:Id', function(req, res) {
-     mongodb.Song.findById(req.params.Id,response(res));
+
+router.get('/all', function(req, res, next) {
+    mongodb.Song.update({},{Views:0},{multi:true},response(res));
 });
 
 function getItem(req){

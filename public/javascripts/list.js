@@ -69,6 +69,15 @@ function VM()
             });
          }
      };
+
+     _self.UpdateSongsStatistics=function()
+     {
+          For(_.chain(_self.files()).map(function(q){ return q.id(); }).reduce(function(memo,current){ return memo+','+current;}).value().split(','),function(item){
+            updateItem("/api/songs/"+item,{}).done(function(data){
+               console.log(data);
+            });
+          });
+     }
      _self.goToPresentation=function(){
          window.location.href="/presentation";
      };

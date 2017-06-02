@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 // var Dropbox= require('dropbox');
-// var _ = require('underscore');
+var _ = require('underscore');
 // var Promise = require('promise');
 // var fs = require('fs');
 var mongodb= require('../../mongoApi.js');
@@ -15,10 +15,9 @@ router.post('/',function(req,res,next){
 });
 router.put('/',function(req,res,next){
     var updateItem=getItem(req);
-    if(req.body.views)
-        updateItem.Views=req.body.views;
     mongodb.List.findOneAndUpdate({"_id":req.body.id},updateItem,response(res)) 
 });
+
 router.get('/', function(req, res, next) {
      mongodb.List.find({}).sort({Name:1}).exec(response(res));
 });
@@ -45,6 +44,5 @@ function response(res){
         res.end();
     }
 };
-
 
 module.exports = router;
