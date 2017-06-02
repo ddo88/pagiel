@@ -9,4 +9,7 @@ router.get('/List', function(req, res, next) {
   res.render('list', { title: 'List' });
 });
 
+router.get('/presentation', function(req, res, next) {
+  res.render('presentation', { title: 'List' });
+});
 module.exports = router;

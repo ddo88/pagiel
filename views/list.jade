@@ -1,5 +1,4 @@
 extends layout
-
 block content
   h1= title
   p Welcome to #{title}
@@ -37,6 +36,8 @@ block content
             i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){$parent.up($data);}",style="font-size:16px;")
             
     button(data-bind="click:function(){generar();}") Generar
+    button(data-bind="click:function(){goToPresentation();}") Ir a presentación
+    
 
 block scripts
  script(src='/javascripts/list.js')

@@ -1,3 +1,19 @@
+function getSync(url){
+    var result;
+    $.ajax({
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      url: url,
+      async: false, 
+      success: function(data) {
+        result=data;
+      },error:function(){
+          console.log(arguments);
+      }
+    });
+    return result;
+}
+
 function get(url){
     return $.getJSON(url);
  }
@@ -26,7 +42,14 @@ function updateItem(url,item){
         }
     });
   };
-
+function For(items,exec,init){
+    var result=undefined;
+    for(var i=init||0,length=items.length;i<length;i++)
+    {
+        result=exec(items[i],i);
+    }
+    return result;
+ };
 function AsyncFor(items,exec,init){
     var dfd = jQuery.Deferred();
     setTimeout(function(){
@@ -49,6 +72,10 @@ function Song(item,parent){
     _self.chords = ko.observable();
     _self.tipo   = ko.observable();
     _self.views  = ko.observable();
+    _self.lyricsFormat = ko.computed(function(){
+        var r=_self.lyrics();
+        return "";
+    })
     function setData(val){
         _self.id(val["_id"]);
         _self.name(val.Name);

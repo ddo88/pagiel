@@ -45,7 +45,11 @@ function VM()
     };
     _self.buscar        = function(){
         _self.files([]);
-        var ids=_self.selectedFiles().value();
+        var ids=undefined;
+        if(_self.selectedFiles())
+            ids=_self.selectedFiles().value();
+        else
+            ids=_.map(_self.currentList().Songs,function(x){ return x;});
         AsyncFor(ids,function(item){
             get('/api/songs/'+item).done(function(data){
                 _self.files.push(new Song(data,_self));//new Song(item,_self));
@@ -55,27 +59,30 @@ function VM()
      _self.generar=function(){
          var item={ ids: _.chain(_self.files()).map(function(q){ return q.id(); }).reduce(function(memo,current){ return memo+','+current;}).value() };
          if(_self.currentList()){
-             debugger;
-             item.id=_self.currentList()["_id"];
+            item.id=_self.currentList()["_id"];
             updateItem("/api/lists",item).done(function(data){
-                debugger;
-            })
+            });
          }else
          {
             postItem('/api/lists',item).done(function(data){
-                console.log("inserted");
+                
             });
          }
+     };
+     _self.goToPresentation=function(){
+         window.location.href="/presentation";
      };
     _self.init          = function(){
         _self.files([]);
         _self.selectedFiles($("#required").data("kendoMultiSelect"));
         get('/api/lists/current').done(function(list){
-            debugger;
             if(list.length){
                 _self.currentList(list[0]);
-                _self.selectedFiles().value(list[0].Songs);
-                _self.buscar();
+                try{_self.selectedFiles().value(list[0].Songs);}catch(e){}
+                setTimeout(function(){
+                    _self.buscar();
+                },2000);
+                
             }
         });
       };
