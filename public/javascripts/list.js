@@ -98,8 +98,11 @@ function VM()
     _self.goToPresentationChords=function(){
          window.location.href="/presentationChords";
      };
-     
+     _self.goToSongs=function(){
+         window.location.href="/songs";
+     }
     _self.init          = function(){
+        _self.initMultiselect();
         _self.files([]);
         _self.selectedFiles($("#required").data("kendoMultiSelect"));
         get('/api/lists/current').done(function(list){
@@ -115,34 +118,29 @@ function VM()
             }
         });
       };
+    _self.initMultiselect=function(){
+          $("#required").kendoMultiSelect({
+            dataSource: { transport: { read: { dataType: "json", url: "/api/songs",}}},
+            itemTemplate:'<span class="k-state-default">#:data.Name#</span><span class="k-state-default"><p>#: data.Type #</p></span>',
+            dataTextField: "Name",
+            dataValueField: "_id",
+            change: _self.buscar,
+            tagMode: "single",
+            height:250,
+            maxSelectedItems: 8
+        });
+      };
+    
     _self.init();
     return _self;
 }
 
 $(function(){
-     $("#required").kendoMultiSelect({
-        dataSource: {
-                transport: {
-                    read: {
-                        dataType: "json",
-                        url: "/api/songs",
-                    }
-                }
-        },
-        itemTemplate:
-            '<span class="k-state-default">#:data.Name#</span>' +
-            '<span class="k-state-default"><p>#: data.Type #</p></span>'
-        ,dataTextField: "Name"
-        ,dataValueField: "_id"
-     });
-    $( document ).tooltip({
-      items: ".custom-tooltip",
-      content: function() {
-        var element = $(this).find('.custom-tooltip-message');
-        return element.html();
-      }
-    });
-
+     
+    $( document ).tooltip({ items: ".custom-tooltip",
+                            content: function() {
+                                var element = $(this).find('.custom-tooltip-message');
+                                return element.html();}
+                          });
     ko.applyBindings(new VM());
-    
 });

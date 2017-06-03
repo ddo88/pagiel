@@ -11,6 +11,34 @@ textarea {
   height: 150px !important;
 }
 
-#lyrics textarea{
-  height: 310px !important;
+div#list {
+    margin-top: 20px;
+}
+#lyrics textarea, #chords textarea{
+  height: 350px !important;
+}
+.options td {
+    /* margin: 5px; */
+    padding: 1px !important;
+}
+.options button {
+    min-width: 150px;
+}
+
+li.k-button {
+    background-color: #8ebc00;
+    color: #eae8e8;
+}
+
+/*jqueryui*/
+.ui-widget-header {
+    border: none !important; 
+    background: white !important; 
+    color: #333333;
+    font-weight: bold;
+}
+
+.ui-button .ui-icon {
+    background-image: none !important;
+    content: "\0274c";
 }

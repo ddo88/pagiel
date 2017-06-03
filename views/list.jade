@@ -1,14 +1,32 @@
 extends layout
 block content
   h1= title
-  p Welcome to #{title}
+  p domingo
   .demo.container
+    .row
+      button(class="btn btn-link pull-right",data-bind="click:function(){ goToSongs();}") Administrar Canciones
     .row
       .col-md-6
         .form-group
           label Canciones
           select(id="required",multiple="multiple")
-        button(data-bind="click:function(){buscar();}") Buscar
+          
+      .col-md-6
+        table(class="options pull-right")
+          tbody
+            tr
+              td 
+                button(class="btn btn-primary btn-block",data-bind="click:function(){generar();}") Generar
+              td
+                button(class="btn btn-primary btn-block",data-bind="click:function(){UpdateSongsStatistics();}") Update
+            tr
+              td
+                button(class="btn btn-success btn-block",data-bind="click:function(){goToPresentation();}") Ir a presentación
+              td
+                button(class="btn btn-warning btn-block",data-bind="click:function(){goToPresentationChords();}") Ir a Notas
+    //- .row
+    //-   button(data-bind="click:function(){buscar();}") Buscar
+                    
 
   div(id="list")
     table.table.table-striped
@@ -20,30 +38,26 @@ block content
             span Nombre
           th
             span Tipo
-          th 
-            span Position
-          th
+          th(class="hidden-xs hidden-sm")
             span Tono
+          th(class="hidden-xs hidden-sm") 
+            span Position
       tbody(data-bind='foreach:files,visible: files().length')
         tr
           td
-            span(data-bind="text:$index")
+            span(data-bind="text:($index()+1)")
           td(class="custom-tooltip")
             span(data-bind="text:name")
             spen(data-bind="text:lyrics",class="custom-tooltip-message",style="display:none;")
           td
             span(data-bind="text:tipo")
-          td
+          td(class="hidden-xs hidden-sm")
+            i(class="fa fa-arrow-up text-info pull-left",aria-hidden="true",data-bind="click:function(){Up();}",style="font-size:16px;")
+            i(class="fa fa-arrow-down text-info pull-left",aria-hidden="true",data-bind="click:function(){Down();}",style="font-size:16px;")
+            span(data-bind="text:tono",class="pull-left",style="min-width:10px;margin-right:5px;")
+          td(class="hidden-xs hidden-sm")
             i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){$parent.down($data);}",style="font-size:16px;") &nbsp;&nbsp;
             i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){$parent.up($data);}",style="font-size:16px;")
-          td
-            span(data-bind="text:tono") &nbsp;&nbsp;
-            i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){Up();}",style="font-size:16px;") &nbsp;&nbsp;
-            i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){Down();}",style="font-size:16px;")
-    button(data-bind="click:function(){generar();}") Generar
-    button(data-bind="click:function(){goToPresentation();}") Ir a presentación
-    button(data-bind="click:function(){goToPresentationChords();}") Ir a Notas
-    button(data-bind="click:function(){UpdateSongsStatistics();}") Update
     
 
 block scripts

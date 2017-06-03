@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  h1= title
+  p Lista de canciones
+
+  div(id="drop",class="container")
+    .row
+      button(class="btn btn-link pull-right",data-bind="click:function(){ goToList();}") Ir a lista
+    .row
+      button(data-bind="click:newItem",class="btn btn-default") New
+      &nbsp;&nbsp;
+      i(class="fa fa-refresh",aria-hidden="true",data-bind="click:function(){init();}")
+    .row  
+      table(class='table table-striped')
+        thead
+          tr
+            th #
+            th Canción
+            th(class="hidden-xs hidden-sm") Tipo
+            th(class="hidden-xs hidden-sm") Vista
+        tbody(data-bind='foreach:files')
+          tr
+            td 
+              span(data-bind='text:$index')
+            td
+              span(data-bind='text:name')
+            td(class="hidden-xs hidden-sm")
+              span(data-bind="text:tipo")
+            td(class="hidden-xs hidden-sm")
+              span(data-bind="text:views")
+            td
+              i(data-bind="css: getIcon()",aria-hidden="true")
+            td
+              button(data-bind='click:showLetra',class="btn btn-info") Letra
+            td
+              button(data-bind='click:showNotas',class="btn btn-success") Notas
+            td(class="hidden-xs hidden-sm")
+              button(data-bind='click:editSong',class="btn btn-warning") Editar
+
+  include ../views/partials/songs/edit.jade
+  include ../views/partials/songs/new.jade
+  include ../views/partials/songs/lyrics.jade      
+  include ../views/partials/songs/chords.jade
+
+block scripts
+  script(src='/javascripts/songsPrincipal.js')

@@ -5,12 +5,15 @@ var router = express.Router();
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/',function(req,res,next){
+  res.render('index',{});
+})
+router.get('/songs', function(req, res, next) {
+  res.render('songs', { title: 'Canciones' });
 });
 
-router.get('/List', function(req, res, next) {
-  res.render('list', { title: 'List' });
+router.get('/list', function(req, res, next) {
+  res.render('list', { title: 'Lista' });
 });
 
 router.get('/presentation', function(req, res, next) {
