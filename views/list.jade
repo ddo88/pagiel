@@ -22,6 +22,8 @@ block content
             span Tipo
           th 
             span Position
+          th
+            span Tono
       tbody(data-bind='foreach:files,visible: files().length')
         tr
           td
@@ -34,9 +36,13 @@ block content
           td
             i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){$parent.down($data);}",style="font-size:16px;") &nbsp;&nbsp;
             i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){$parent.up($data);}",style="font-size:16px;")
-            
+          td
+            span(data-bind="text:tono") &nbsp;&nbsp;
+            i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){Up();}",style="font-size:16px;") &nbsp;&nbsp;
+            i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){Down();}",style="font-size:16px;")
     button(data-bind="click:function(){generar();}") Generar
     button(data-bind="click:function(){goToPresentation();}") Ir a presentación
+    button(data-bind="click:function(){goToPresentationChords();}") Ir a Notas
     button(data-bind="click:function(){UpdateSongsStatistics();}") Update
     
 

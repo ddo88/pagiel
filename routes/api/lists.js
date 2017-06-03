@@ -31,7 +31,7 @@ router.get('/:Id', function(req, res) {
 function getItem(req){
     var item={
         Date: new Date(),
-        Songs: req.body.ids.split(',')
+        Songs: JSON.parse(req.body.data)
     };
     return item;
 }

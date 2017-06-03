@@ -17,4 +17,8 @@ router.get('/presentation', function(req, res, next) {
   res.render('presentation', { title: 'List' });
 });
 
+router.get('/presentationChords', function(req, res, next) {
+  res.render('presentationChords', { title: 'Notas' });
+});
+
 module.exports = router;

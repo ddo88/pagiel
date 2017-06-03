@@ -31,7 +31,10 @@ mongoApi.createSchemaList=function(){
         // Songs:[{
         //     ids:String
         // }]
-        Songs:[]
+        Songs:[{
+            id:String,
+            tono:Number
+        }]
     });
 };
 // Create a model

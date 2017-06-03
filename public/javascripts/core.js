@@ -72,6 +72,7 @@ function Song(item,parent){
     _self.chords = ko.observable();
     _self.tipo   = ko.observable();
     _self.views  = ko.observable();
+    _self.tono   = ko.observable(0);
     _self.lyricsFormat = ko.computed(function(){
         var r=_self.lyrics();
         return "";
@@ -99,3 +100,24 @@ function Song(item,parent){
      }
     return _self;
  }
+ function pad(pad, str, padLeft) {
+  if (typeof str === 'undefined') 
+    return pad;
+  if (padLeft) {
+    return (pad + str).slice(-pad.length);
+  } else {
+    return (str + pad).substring(0, pad.length);
+  }
+}
+function getImageRamdon(number){
+    var arr=[];
+    _(31).times(function(i){
+        arr.push(i);
+    });
+    var result=[];
+    var q=_.sample(arr, number);
+    _(number).times(function(idx){
+        result.push(pad('000',q[idx],true)+".jpg");
+    })
+    return result;
+}
