@@ -7,7 +7,7 @@ block css
 block content
  .reveal
   .slides(data-bind='foreach:files,visible: files().length')
-   section(data-markdown,class="stretch",data-separator-vertical="^\r",data-bind="attr:{'data-background':image}")
+   section(data-markdown,class="stretch",data-separator-vertical="^\r\r",data-bind="attr:{'data-background':image}")
     textarea(data-bind="text:lyrics",data-template)
   
 block scripts
