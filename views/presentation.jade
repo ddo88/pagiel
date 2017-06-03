@@ -6,6 +6,7 @@ block css
  link(rel="stylesheet",href="/stylesheets/revealCustom.css")
 block content
  .reveal
+  a(href="/list",class="back") Volver
   .slides(data-bind='foreach:files,visible: files().length')
    section(data-markdown,class="stretch",data-separator-vertical="^\r\r",data-bind="attr:{'data-background':image}")
     textarea(data-bind="text:lyrics",data-template)

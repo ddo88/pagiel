@@ -3,10 +3,12 @@ block css
  link(rel="stylesheet",href="/javascripts/revealjs/css/reveal.css")
  link(rel="stylesheet",href="/javascripts/revealjs/css/theme/white.css",id="theme")
  link(rel="stylesheet",href="/javascripts/revealjs/lib/css/zenburn.css")
+ link(rel="stylesheet",href="/stylesheets/revealCustom.css")
 block content
  .reveal
+  a(href="/list",class="back") Volver
   .slides(data-bind='foreach:files,visible: files().length')
-   section(data-markdown,class="stretch",data-separator-vertical="^\r")
+   section(data-markdown,class="stretch",data-separator-vertical="^\r\r")
     textarea(data-bind="text:transposeChord(chords(),tono())",data-template)
   
 block scripts

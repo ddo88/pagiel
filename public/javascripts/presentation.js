@@ -47,6 +47,9 @@ $(function(){
 
 function loadReveal(){
     Reveal.initialize({
+        minScale: 0.2,
+	    maxScale: 1.5,
+        
         controls: true,
         progress: true,
         history: true,

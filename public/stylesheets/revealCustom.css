@@ -1,6 +1,30 @@
-.reveal p, .reveal h4 {
+/*.reveal h4 {
     margin: 20px;
     line-height: 1.3;
     background-color: rgba(255,255,255,0.8);
     padding: 25px;
+}*/
+
+
+.reveal p, .reveal h4 {
+    /*margin: none !important;
+    */
+    background-color: rgba(255,255,255,0.8);
+}
+
+.reveal h4 {
+    font-size: 1.2em;
+    padding: 40px;
+}
+
+.reveal pre code {
+    overflow: none !important;
+    max-height: 900px !important;
+    text-align: justify;
+}
+
+a.back {
+    z-index: 9999;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.5em;
 }
