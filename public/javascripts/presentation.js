@@ -37,6 +37,7 @@ function VM()
         });
       };
     _self.init();
+    loadSocketIOEvents();
     return _self;
 }
 
@@ -44,7 +45,12 @@ $(function(){
     ko.applyBindings(new VM());
 });
 
-
+function loadSocketIOEvents(){
+    socket.on('presentationEvent',function(event){
+        //console.log(event);
+        Reveal.slide( event.indexh, event.indexv);
+    })
+}
 function loadReveal(){
     Reveal.initialize({
         minScale: 0.2,
@@ -63,5 +69,14 @@ function loadReveal(){
             { src: '/javascripts/revealjs/plugin/zoom-js/zoom.js', async: true },
             { src: '/javascripts/revealjs/plugin/notes/notes.js', async: true }
         ]
-    });	
+    });
+
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+	// event.previousSlide, event.currentSlide, event.indexh, event.indexv
+        //console.log(event);
+        socket.emit('commandEvent',{ previous:event.previousSlide, 
+                                     current: event.currentSlide, 
+                                     indexh:  event.indexh, 
+                                     indexv:  event.indexv});
+    });
 }

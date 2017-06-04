@@ -13,9 +13,6 @@ var api_users = require('./routes/api/users');
 var api_songs = require('./routes/api/songs');
 var api_lists = require('./routes/api/lists');
 var app       = express();
-
-
-// var configAuth     = require('./configAuth.js');
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
