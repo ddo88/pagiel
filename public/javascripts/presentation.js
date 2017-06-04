@@ -37,6 +37,7 @@ function VM()
         });
       };
     _self.init();
+    loadSocketIOEvents();
     return _self;
 }
 
@@ -51,6 +52,11 @@ function loadSocketIOEvents(){
         if(!presenter)
             Reveal.slide( event.indexh, event.indexv);
     })
+
+    socket.on('presenterSelect',function(){
+        if(!presenter)
+            $('#presenter').hide(500);
+    });
 }
 function loadReveal(){
     Reveal.initialize({
@@ -74,7 +80,9 @@ function loadReveal(){
 }
 
 var presenterClick = _.once(function(){
-     Reveal.addEventListener( 'slidechanged', function( event ) {
+    presenter=true;
+    socket.emit('presenterSel');
+    Reveal.addEventListener( 'slidechanged', function( event ) {
 	// event.previousSlide, event.currentSlide, event.indexh, event.indexv
         //console.log(event);
         socket.emit('commandEvent',{ previous:event.previousSlide, 

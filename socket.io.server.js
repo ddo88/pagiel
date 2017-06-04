@@ -10,6 +10,10 @@ module.exports = function(app){
         socket.on('commandEvent',function(message){
             socket.broadcast.emit('presentationEvent',message);
         });
+
+        socket.on('presenterSel',function(){
+            socket.broadcast.emit('presenterSelect',true);
+        });
     });
 
 };
