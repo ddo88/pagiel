@@ -1,4 +1,4 @@
-
+var presenter=false;
 function VM()
 {
     var _self           = this;
@@ -37,18 +37,19 @@ function VM()
         });
       };
     _self.init();
-    loadSocketIOEvents();
     return _self;
 }
 
 $(function(){
     ko.applyBindings(new VM());
+    $('#presenter').on('click',presenterClick);
 });
 
 function loadSocketIOEvents(){
     socket.on('presentationEvent',function(event){
         //console.log(event);
-        Reveal.slide( event.indexh, event.indexv);
+        if(!presenter)
+            Reveal.slide( event.indexh, event.indexv);
     })
 }
 function loadReveal(){
@@ -70,8 +71,10 @@ function loadReveal(){
             { src: '/javascripts/revealjs/plugin/notes/notes.js', async: true }
         ]
     });
+}
 
-    Reveal.addEventListener( 'slidechanged', function( event ) {
+var presenterClick = _.once(function(){
+     Reveal.addEventListener( 'slidechanged', function( event ) {
 	// event.previousSlide, event.currentSlide, event.indexh, event.indexv
         //console.log(event);
         socket.emit('commandEvent',{ previous:event.previousSlide, 
@@ -79,4 +82,4 @@ function loadReveal(){
                                      indexh:  event.indexh, 
                                      indexv:  event.indexv});
     });
-}
+});
