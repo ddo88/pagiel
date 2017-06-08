@@ -12,8 +12,7 @@ function getSync(url){
       }
     });
     return result;
-}
-
+ }
 function get(url){
     return $.getJSON(url);
  }
@@ -41,7 +40,8 @@ function updateItem(url,item){
             "Accept": "application/json;odata=verbose"
         }
     });
-  };
+};
+
 function For(items,exec,init){
     var result=undefined;
     for(var i=init||0,length=items.length;i<length;i++)
@@ -63,6 +63,102 @@ function AsyncFor(items,exec,init){
      
      return dfd.promise();
  };
+function getImageRamdon(number){
+    var arr=[];
+    _(31).times(function(i){
+        arr.push(i);
+    });
+    var result=[];
+    var q=_.sample(arr, number);
+    _(number).times(function(idx){
+        result.push(pad('000',q[idx],true)+".jpg");
+    })
+    return result;
+};
+
+
+function sortableList(model,observableArrayName){
+     model.orderAsc     = ko.observable(true);
+     model.property     = ko.observable('name');
+     model.setOrderBy   = function(property){
+        if(model.property()!==property)
+        {
+            model.property(property);
+            model.orderAsc(true);
+        }
+        else
+            model.orderAsc(!model.orderAsc());
+    };
+    model.listOrdered=ko.computed(function(){
+        var array=_.sortBy(model[observableArrayName](),function(item){
+            return item[model.property()](); 
+        });
+        if(model.orderAsc())
+            return array;
+        else 
+            return array.reverse();
+    });
+    return model;
+};
+function paginator(model, arrayName, numberOfElements) {
+    /// <summary>
+    /// Metodo para extender modelos de knockout y añadir propiedades adicionales para el paginador.
+    /// </summary>
+    /// <param name="model" type="type">Modelo de knockout</param>
+    /// <param name="arrayName" type="type">nombre de la lista observable a paginar</param>
+    /// <param name="numberOfElements" type="type">numero de registros por pagina que se van a visualizar.</param>
+    /// <returns type=""></returns>
+
+
+    if (numberOfElements === undefined || numberOfElements == null) {
+        numberOfElements = 6;
+    } else {
+        numberOfElements = parseInt(numberOfElements);
+    }
+
+    var _self = model;
+
+    _self.pageSize = ko.observable(numberOfElements);
+    _self.pageIndex = ko.observable(0);
+
+    _self.pagedView = ko.computed(function () {
+        var size = _self.pageSize();
+        var start = _self.pageIndex() * size;
+        return _self[arrayName]().slice(start, start + size);
+    });
+
+    _self.maxPageIndex = ko.computed(function () {
+        return Math.ceil(_self[arrayName]().length / _self.pageSize()) - 1;
+    });
+
+    _self.previousPage = function () {
+        if (_self.pageIndex() > 0) {
+            _self.pageIndex(_self.pageIndex() - 1);
+        }
+    };
+
+    _self.nextPage = function () {
+        if (_self.pageIndex() < _self.maxPageIndex()) {
+            _self.pageIndex(_self.pageIndex() + 1);
+        }
+    };
+
+    _self.moveToPage = function (index) {
+        _self.pageIndex(index);
+    };
+
+    _self.allPages = ko.computed(function () {
+        var pages = [];
+        for (i = 0; i <= _self.maxPageIndex() ; i++) {
+            pages.push({ pageNumber: (i + 1) });
+        }
+        return pages;
+    });
+
+    return _self;
+
+}
+
 function Song(item,parent){
     var _self=this;
     _self.parent =parent;
@@ -103,21 +199,23 @@ function Song(item,parent){
  function pad(pad, str, padLeft) {
   if (typeof str === 'undefined') 
     return pad;
-  if (padLeft) {
+  if (padLeft) 
     return (pad + str).slice(-pad.length);
-  } else {
+  else 
     return (str + pad).substring(0, pad.length);
-  }
 }
-function getImageRamdon(number){
-    var arr=[];
-    _(31).times(function(i){
-        arr.push(i);
+
+
+function List(item)
+{
+    var _self=this;
+    _self.Date=ko.observable(item.Date);
+    _self.Songs=ko.observableArray([]);
+    postItem('/api/songs/search',{ids:_.map(item.Songs,"id").join()}).done(function(data){
+        For(data,function(item,idx){
+            _self.Songs.push(new Song(item,_self));
+        });
     });
-    var result=[];
-    var q=_.sample(arr, number);
-    _(number).times(function(idx){
-        result.push(pad('000',q[idx],true)+".jpg");
-    })
-    return result;
+    return _self;   
 }
+

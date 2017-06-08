@@ -37,7 +37,7 @@ function VM()
         });
       };
     _self.init();
-    loadSocketIOEvents();
+    loadSocket();
     return _self;
 }
 
@@ -46,14 +46,12 @@ $(function(){
     $('#presenter').on('click',presenterClick);
 });
 
-function loadSocketIOEvents(){
-    socket.on('presentationEvent',function(event){
-        //console.log(event);
+function loadSocket(){
+    Core.SocketsIO.Subscribe('presentationEvent',function(event){
         if(!presenter)
             Reveal.slide( event.indexh, event.indexv);
-    })
-
-    socket.on('presenterSelect',function(){
+    });
+    Core.SocketsIO.Subscribe('presenterSelect',function(){
         if(!presenter)
             $('#presenter').hide(500);
     });
@@ -62,7 +60,6 @@ function loadReveal(){
     Reveal.initialize({
         minScale: 0.2,
 	    maxScale: 1.5,
-        
         controls: true,
         progress: true,
         history: true,
@@ -75,19 +72,13 @@ function loadReveal(){
             { src: '/javascripts/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
             { src: '/javascripts/revealjs/plugin/zoom-js/zoom.js', async: true },
             { src: '/javascripts/revealjs/plugin/notes/notes.js', async: true }
-        ]
+        ]   
     });
 }
-
 var presenterClick = _.once(function(){
-    presenter=true;
-    socket.emit('presenterSel');
+    presenter      = true;
+    Core.SocketsIO.Send('presenterSel');
     Reveal.addEventListener( 'slidechanged', function( event ) {
-	// event.previousSlide, event.currentSlide, event.indexh, event.indexv
-        //console.log(event);
-        socket.emit('commandEvent',{ previous:event.previousSlide, 
-                                     current: event.currentSlide, 
-                                     indexh:  event.indexh, 
-                                     indexv:  event.indexv});
+	   Core.SocketsIO.Send('commandEvent',{ previous:event.previousSlide, current: event.currentSlide, indexh:  event.indexh, indexv:  event.indexv });
     });
 });

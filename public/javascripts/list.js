@@ -88,10 +88,12 @@ function VM()
      {
           For(_.chain(_self.files()).map(function(q){ return q.id(); }).reduce(function(memo,current){ return memo+','+current;}).value().split(','),function(item){
             updateItem("/api/songs/"+item,{}).done(function(data){
-               console.log(data);
+                console.log(data);
             });
           });
-     }
+          postItem("/api/lists/history",{}).done(function(){ console.log("update");});
+     };
+
      _self.goToPresentation=function(){
          window.location.href="/presentation";
      };

@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://nodetest:nodetest@ds030817.mlab.com:30817/alabanza');
 //demo
 // Create a schema
-mongoApi.createSchemaUser=function(){
+mongoApi.createSchemaUser        = function(){
     return new mongoose.Schema({
         google: {
             id:String,
@@ -15,8 +15,8 @@ mongoApi.createSchemaUser=function(){
             email:String
         }
     });
-}
-mongoApi.createSchemaSong=function(){
+    };
+mongoApi.createSchemaSong        = function(){
     return new mongoose.Schema({
         Name: String,
         Lyrics: String,
@@ -24,8 +24,8 @@ mongoApi.createSchemaSong=function(){
         Type:String,
         Views:Number
     });
-};
-mongoApi.createSchemaList=function(){
+    };
+mongoApi.createSchemaList        = function(){
     return new mongoose.Schema({
         Date: Date,
         // Songs:[{
@@ -36,11 +36,21 @@ mongoApi.createSchemaList=function(){
             tono:Number
         }]
     });
+    };
+mongoApi.createSchemaListHistory = function(){
+    return new mongoose.Schema({
+        Date: Date,
+        Songs:[{
+            id:String,
+            tono:Number
+        }]
+    });
 };
 // Create a model
-mongoApi.Song= mongoose.model("Song", mongoApi.createSchemaSong());
-mongoApi.List= mongoose.model("List",mongoApi.createSchemaList());
-mongoApi.User= mongoose.model("User",mongoApi.createSchemaUser());
+mongoApi.Song        = mongoose.model("Song",       mongoApi.createSchemaSong());
+mongoApi.List        = mongoose.model("List",       mongoApi.createSchemaList());
+mongoApi.ListHistory = mongoose.model("ListHistory",mongoApi.createSchemaList());
+mongoApi.User        = mongoose.model("User",       mongoApi.createSchemaUser());
 
 mongoApi.db=mongoose;
 

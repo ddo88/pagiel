@@ -9,11 +9,6 @@ var configAuth     = require('./configAuth.js');
 var mongoApi       = require('./mongoApi.js');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-// load up the user model
-// var User       = require('../app/models/user');
-// // load the auth variables
-// var configAuth = require('./auth');
-
 module.exports = function(app,passport) {
 
     // used to serialize the user for the session
@@ -38,13 +33,9 @@ module.exports = function(app,passport) {
     // GOOGLE ==================================================================
     // =========================================================================
     passport.use(new GoogleStrategy({
-
         clientID        : configAuth.googleAuth.clientID,
         clientSecret    : configAuth.googleAuth.clientSecret,
-        callbackURL     : configAuth.googleAuth.callbackURL,
-
-    },
-    function(token, refreshToken, profile, done) {
+        callbackURL     : configAuth.googleAuth.callbackURL,},function(token, refreshToken, profile, done) {
 
         // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google

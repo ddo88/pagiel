@@ -52,6 +52,7 @@ Song.prototype.Cancel    = function(){
 function VM(){
     var _self=this;
     _self.files        = ko.observableArray();
+    _self              = sortableList(_self,'files');
     _self.currentFile  = ko.observable();
     _self.enableNew    = ko.observable(false);
     _self.enableEdit   = ko.observable(false);
@@ -91,6 +92,5 @@ function VM(){
 }
 
 $(function(){
-    //dropbox = new Dropbox({ accessToken: 'rQbx2WVaCCMAAAAAAAACM1737RJ_TBS3FWn65a9YzGq39MDNqUffbxyk_kgmBBQW' });
     ko.applyBindings(new VM());
 });

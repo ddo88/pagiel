@@ -6,8 +6,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/',function(req,res,next){
-  res.redirect('/presentation');
-  //res.render('index',{});
+  //res.redirect('/presentation');
+  res.render('index',{});
 })
 router.get('/songs', function(req, res, next) {
   res.render('songs', { title: 'Canciones' });

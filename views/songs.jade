@@ -16,10 +16,10 @@ block content
         thead
           tr
             th #
-            th Canción
-            th(class="hidden-xs hidden-sm") Tipo
-            th(class="hidden-xs hidden-sm") Vista
-        tbody(data-bind='foreach:files')
+            th(data-bind="click:function(){ setOrderBy('name');}") Canción
+            th(data-bind="click:function(){ setOrderBy('tipo');}",class="hidden-xs hidden-sm") Tipo
+            th(data-bind="click:function(){ setOrderBy('views');}",class="hidden-xs hidden-sm") Vista
+        tbody(data-bind='foreach:listOrdered')
           tr
             td 
               span(data-bind='text:$index')
