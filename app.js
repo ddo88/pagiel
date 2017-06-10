@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var passport     = require('passport');
+var compression = require('compression');
 
 var index     = require('./routes/index');
 var users     = require('./routes/users');
@@ -13,7 +14,7 @@ var api_users = require('./routes/api/users');
 var api_songs = require('./routes/api/songs');
 var api_lists = require('./routes/api/lists');
 var app       = express();
-
+app.use(compression());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
