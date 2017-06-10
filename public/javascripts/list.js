@@ -86,12 +86,18 @@ function VM()
 
      _self.UpdateSongsStatistics=function()
      {
-          For(_.chain(_self.files()).map(function(q){ return q.id(); }).reduce(function(memo,current){ return memo+','+current;}).value().split(','),function(item){
-            updateItem("/api/songs/"+item,{}).done(function(data){
-                console.log(data);
+         var r=confirm("esta seguro de actualizar la lista?")
+         if(r){
+            For(_.chain(_self.files()).map(function(q){ return q.id(); }).reduce(function(memo,current){ return memo+','+current;}).value().split(','),
+            function(item){
+                updateItem("/api/songs/"+item,{}).done(function(data){
+                   console.log(data);
+                });
             });
-          });
-          postItem("/api/lists/history",{}).done(function(){ console.log("update");});
+             postItem("/api/lists/history",{}).done(function(){ console.log("update");});
+            console.log("guardado");
+         }
+          
      };
 
      _self.goToPresentation=function(){
@@ -103,7 +109,7 @@ function VM()
      _self.goToSongs=function(){
          window.location.href="/songs";
      }
-    _self.init          = function(){
+    _self.init            = function(){
         _self.initMultiselect();
         _self.files([]);
         _self.selectedFiles($("#required").data("kendoMultiSelect"));
@@ -120,7 +126,7 @@ function VM()
             }
         });
       };
-    _self.initMultiselect=function(){
+    _self.initMultiselect = function(){
           $("#required").kendoMultiSelect({
             dataSource: { transport: { read: { dataType: "json", url: "/api/songs",}}},
             itemTemplate:'<span class="k-state-default">#:data.Name#</span><span class="k-state-default"><p>#: data.Type #</p></span>',
