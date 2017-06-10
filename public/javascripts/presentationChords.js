@@ -93,6 +93,11 @@ var transposeChord   = function (chord, amount) {
             }
         }
     }
+    try{
+        return subst.join("");
+    }catch(e){
+        return "";
+    }
     //chord = subst.join("");
-    return subst.join("");
+    
 };
