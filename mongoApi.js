@@ -3,7 +3,7 @@ var mongoApi = {
 }
 var mongoose = require('mongoose');
 // Connect to MongoDB and create/use database called todoAppTest
-mongoose.connect('mongodb://nodetest:nodetest@ds030817.mlab.com:30817/alabanza');
+mongoose.connect( process.env.MongoConnectionString);
 //demo
 // Create a schema
 mongoApi.createSchemaUser        = function(){
