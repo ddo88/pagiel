@@ -138,11 +138,12 @@ function VM()
 }
 
 $(function(){
-     
-    $( document ).tooltip({ items: ".custom-tooltip",
-                            content: function() {
-                                var element = $(this).find('.custom-tooltip-message');
-                                return element.html();}
-                          });
+     try{
+        $(document)
+            .tooltip({ items: ".custom-tooltip",
+                    content: function() { var element = $(this).find('.custom-tooltip-message');return element.html();}
+            });
+     }catch(e){}
+    
     ko.applyBindings(new VM());
 });
