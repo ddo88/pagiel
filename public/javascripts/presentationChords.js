@@ -42,6 +42,7 @@ function VM()
 
 $(function(){
     ko.applyBindings(new VM());
+    $('#header').hide();
 });
 
 

@@ -44,6 +44,7 @@ function VM()
 $(function(){
     ko.applyBindings(new VM());
     $('#presenter').on('click',presenterClick);
+    $('#header').hide();
 });
 
 function loadSocket(){
