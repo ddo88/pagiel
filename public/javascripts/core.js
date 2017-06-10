@@ -219,3 +219,6 @@ function List(item)
     return _self;   
 }
 
+$(function(){
+    $('#Carousel').carousel();
+});

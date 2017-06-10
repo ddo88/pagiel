@@ -1,19 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-// var Dropbox= require('dropbox');
+var response= require('../../core.js').response;
 var _ = require('underscore');
-// var Promise = require('promise');
-// var fs = require('fs');
+
 var mongodb= require('../../mongoApi.js');
 
 //var dropboxApi = new Dropbox({ accessToken: 'rQbx2WVaCCMAAAAAAAACM1737RJ_TBS3FWn65a9YzGq39MDNqUffbxyk_kgmBBQW' });
 router.get('/', function(req, res, next) {
      mongodb.Song.find({}).sort({Name:1}).exec(response(res));
 });
+// router.get('/all', function(req, res, next) {
+//     mongodb.Song.update({},{Views:0},{multi:true},response(res));
+// });
 router.get('/details',function(req,res,next){
     var ord=parseInt(req.query.order||1);
-    //res.send({res:1});
     mongodb.Song.find({}).sort({Views:ord}).limit(5).exec(response(res));
 });
 router.get('/:Id', function(req, res) {
@@ -45,10 +46,6 @@ router.put('/:Id', function(req, res) {
      mongodb.Song.findOneAndUpdate({"_id":req.params.Id},{ $inc: { "Views" : 1 } },response(res));
 });
 
-router.get('/all', function(req, res, next) {
-    mongodb.Song.update({},{Views:0},{multi:true},response(res));
-});
-
 function getItem(req){
     return {
         Lyrics: req.body.lyrics,
@@ -57,15 +54,5 @@ function getItem(req){
         Type:   req.body.type
     }
 }
-function response(res){
-    return function (err,data){
-        if(err)
-            res.send({error:true,message:err});
-        else
-            res.send(data);
-        res.end();
-    }
-};
-
 
 module.exports = router;

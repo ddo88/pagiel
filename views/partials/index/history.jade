@@ -1,0 +1,19 @@
+section(id="faq",class="parallax section history")
+    .wrapsection
+        .container
+            .row
+                .col-md-12.sol-sm-12
+                    .maintitle
+                        h3(class="section-title")
+                            span(class="wow bounceInRight") historico
+            .row
+                .col-md-4.col-sm-12(data-bind="foreach:history")
+                    div(class="faq-block wow bounceInDown",data-wow-duration="1.5s",data-wow-delay="0s")
+                        div(class="panel-group")
+                            div(class="panel panel-default")
+                                div(class="panel-heading")
+                                    h4(class="panel-title",data-bind="text:moment(Date()).format('YYYY-MM-DD')") demo
+                                div(class="panel-body")
+                                    ul(data-bind="foreach:Songs")
+                                        li
+                                            span(data-bind="text:name")

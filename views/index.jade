@@ -1,54 +1,17 @@
 extends layout
 block content
-  .container
-    .row
-      .col-md-6
-        a(href="/list") ir a lista
+  include ../views/partials/index/statistics.jade
+  include ../views/partials/index/history.jade
 
-    .row
-      .col-md-6
-        .form-group
-          label Estadisticas de canciones
-          div(id="tabs")
-            ul
-              li.k-state-active
-                label Más vistas
-              li
-                label Menos vistas
-            div
-              table(class="table table-striped")
-                thead
-                  tr
-                    th Nombre
-                    th Tipo
-                    th Vistas
-                tbody(data-bind="foreach:songsMostView")
-                  tr
-                    td(data-bind="text:name")
-                    td(data-bind="text:tipo")
-                    td(data-bind="text:views")
-            div
-              table(class="table")
-                thead
-                  tr
-                    th Nombre
-                    th Tipo
-                    th Vistas
-                tbody(data-bind="foreach:songsLessView")
-                  tr
-                    td(data-bind="text:name")
-                    td(data-bind="text:tipo")
-                    td(data-bind="text:views")
-      .col-md-6
-
-        label Listas anteriores
-        ul(id="panel",data-bind="foreach:history")
-          li
-            span(data-bind="text:Date")
-            ul(data-bind="foreach:Songs")
-              li
-                div
-                  span(data-bind="text:name")
+              //- .col-md-6
+              //-   label Listas anteriores
+              //-   ul(id="panel",data-bind="foreach:history")
+              //-     li
+              //-       span(data-bind="text:Date")
+              //-       ul(data-bind="foreach:Songs")
+              //-         li
+              //-           div
+              //-             span(data-bind="text:name")
  
 block scripts
   script(src='/javascripts/index.js')

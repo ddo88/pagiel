@@ -1,0 +1,43 @@
+section(id="gallery",class="section",style="background-image: url(theme/assets/img/intro.jpg);")
+    div.wrapsection
+        div(class="parallax-overlay",style="background-color:#00c1c1;opacity:0.3;")
+        .container
+            .row
+                .col-md-12.col-sm-12
+                    .maintitle
+                        h3.section-title Estadisticas
+                        p.lead listado de canciones más ejecutadas y menos ejecutadas
+                .col-md-12
+                    div(id="Carousel",class="carousel slide")
+                        ol.carousel-indicators
+                            li(data-target="#Carousel",data-slide-to="0",class="active")
+                            li(data-target="#Carousel",data-slide-to="1")
+                        div(class="carousel-inner")
+                            div(class="item active")
+                                label
+                                    b Menos vistas
+                                table(class="table")
+                                    thead
+                                        tr
+                                            th Nombre
+                                            th Tipo
+                                            th Vistas
+                                    tbody(data-bind="foreach:songsMostView")
+                                        tr
+                                            td(data-bind="text:name")
+                                            td(data-bind="text:tipo")
+                                            td(data-bind="text:views")
+                            div(class="item")
+                                label 
+                                    b Más vistas
+                                table(class="table")
+                                    thead
+                                        tr
+                                            th Nombre
+                                            th Tipo
+                                            th Vistas
+                                    tbody(data-bind="foreach:songsMostView")
+                                        tr
+                                            td(data-bind="text:name")
+                                            td(data-bind="text:tipo")
+                                            td(data-bind="text:views")

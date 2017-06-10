@@ -1,42 +1,48 @@
 extends layout
 
 block content
-  h1= title
-  p Lista de canciones
-
-  div(id="drop",class="container")
-    .row
-      button(class="btn btn-link pull-right",data-bind="click:function(){ goToList();}") Ir a lista
-    .row
-      button(data-bind="click:newItem",class="btn btn-default") New
-      &nbsp;&nbsp;
-      i(class="fa fa-refresh",aria-hidden="true",data-bind="click:function(){init();}")
-    .row  
-      table(class='table table-striped')
-        thead
-          tr
-            th #
-            th(data-bind="click:function(){ setOrderBy('name');}") Canción
-            th(data-bind="click:function(){ setOrderBy('tipo');}",class="hidden-xs hidden-sm") Tipo
-            th(data-bind="click:function(){ setOrderBy('views');}",class="hidden-xs hidden-sm") Vista
-        tbody(data-bind='foreach:listOrdered')
-          tr
-            td 
-              span(data-bind='text:$index')
-            td
-              span(data-bind='text:name')
-            td(class="hidden-xs hidden-sm")
-              span(data-bind="text:tipo")
-            td(class="hidden-xs hidden-sm")
-              span(data-bind="text:views")
-            td
-              i(data-bind="css: getIcon()",aria-hidden="true")
-            td
-              button(data-bind='click:showLetra',class="btn btn-info") Letra
-            td
-              button(data-bind='click:showNotas',class="btn btn-success") Notas
-            td(class="hidden-xs hidden-sm")
-              button(data-bind='click:editSong',class="btn btn-warning") Editar
+  section(id="about",class="parallax section",style="background-image: url(http://themepush.com/demo/runcharity/assets/img/1.jpg);")
+    .wrapsection
+      div(class="parallax-overlay",style="background-color: #01b0d1;opacity:0.9;")
+      .container
+        .row
+          .col-md-12
+            .maintitle
+              h3.section-title
+                span.lighter Listado de
+                strong Canciones 
+              //- p.lead  Mentum lectus id turpis suscipit, ut egestas magna volutpat. Donec a purus tellus. Nunc ut dolor eu est gravida auctor quis vitae sapien.
+          .col-md-12
+            button(data-bind="click:newItem",class="btn btn-default") New
+          .col-md-4.col-sm-6
+            div(id="drop",class="container")
+              i(class="fa fa-refresh",aria-hidden="true",data-bind="click:function(){init();}") 
+              br
+              table(class='table')
+                thead
+                  tr
+                    th #
+                    th(data-bind="click:function(){ setOrderBy('name');}") Canción
+                    th(data-bind="click:function(){ setOrderBy('tipo');}",class="hidden-xs hidden-sm") Tipo
+                    th(data-bind="click:function(){ setOrderBy('views');}",class="hidden-xs hidden-sm") Vista
+                tbody(data-bind='foreach:listOrdered')
+                  tr
+                    td 
+                      span(data-bind='text:$index')
+                    td
+                      span(data-bind='text:name')
+                    td(class="hidden-xs hidden-sm")
+                      span(data-bind="text:tipo")
+                    td(class="hidden-xs hidden-sm")
+                      span(data-bind="text:views")
+                    td
+                      i(data-bind="css: getIcon()",aria-hidden="true")
+                    td
+                      button(data-bind='click:showLetra',class="btn btn-info") Letra
+                    td
+                      button(data-bind='click:showNotas',class="btn btn-success") Notas
+                    td(class="hidden-xs hidden-sm")
+                      button(data-bind='click:editSong',class="btn btn-warning") Editar
 
   include ../views/partials/songs/edit.jade
   include ../views/partials/songs/new.jade
