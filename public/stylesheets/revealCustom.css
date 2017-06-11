@@ -21,6 +21,8 @@
     overflow: none !important;
     max-height: 900px !important;
     text-align: justify;
+    background-color: #FFF;
+    color: #000;
 }
 
 a.back {
