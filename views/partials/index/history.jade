@@ -6,8 +6,8 @@ section(id="faq",class="parallax section history")
                     .maintitle
                         h3(class="section-title")
                             span(class="wow bounceInRight") historico
-            .row
-                .col-md-4.col-sm-12(data-bind="foreach:history")
+            .row(data-bind="foreach:history")
+                .col-md-4.col-sm-12
                     div(class="faq-block wow bounceInDown",data-wow-duration="1.5s",data-wow-delay="0s")
                         div(class="panel-group")
                             div(class="panel panel-default")
