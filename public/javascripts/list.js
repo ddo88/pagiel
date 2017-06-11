@@ -59,13 +59,18 @@ function VM()
             ids=_self.selectedFiles().value();
         else
             ids=_.map(_self.currentList().Songs,function(x){ return x;});
-        AsyncFor(ids,function(item,i){
-            get('/api/songs/'+item).done(function(data){
-                var song=new Song(data,_self);
-                song.tono(_self.tonos[i]||0);
-                _self.files.push(song);//new Song(item,_self));
+        For(ids,function(item,i){
+            var data =getSync('/api/songs/'+item)
+            var song=new Song(data,_self);
+            song.tono(_self.tonos[i]||0);
+            _self.files.push(song);//new Song(item,_self));
+            
+            // get('/api/songs/'+item).done(function(data){
+            //     var song=new Song(data,_self);
+            //     song.tono(_self.tonos[i]||0);
+            //     _self.files.push(song);//new Song(item,_self));
                 
-            });
+            // });
         })
       };//https://wallpaperscraft.com/catalog/nature/1920x1080/page3
      _self.generar=function(){
