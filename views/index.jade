@@ -2,19 +2,7 @@ extends layout
 block content
   include ../views/partials/index/statistics.jade
   include ../views/partials/index/history.jade
-
-              //- .col-md-6
-              //-   label Listas anteriores
-              //-   ul(id="panel",data-bind="foreach:history")
-              //-     li
-              //-       span(data-bind="text:Date")
-              //-       ul(data-bind="foreach:Songs")
-              //-         li
-              //-           div
-              //-             span(data-bind="text:name")
  
 block scripts
-  script(src='/javascripts/index.js')
-  script(src='/javascripts/io.js')
-            
+  script(src='/javascripts/build/index.js')           
   

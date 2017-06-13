@@ -1,9 +1,6 @@
 extends layout1
 block css
- link(rel="stylesheet",href="/javascripts/revealjs/css/reveal.css")
- link(rel="stylesheet",href="/javascripts/revealjs/css/theme/white.css",id="theme")
- link(rel="stylesheet",href="/javascripts/revealjs/lib/css/zenburn.css")
- link(rel="stylesheet",href="/stylesheets/revealCustom.css")
+ link(rel="stylesheet",href="/stylesheets/revealAll.css") 
 block content
  .reveal
   a(href="/list",class="back") Volver
@@ -15,6 +12,5 @@ block content
 block scripts
  script(src="/javascripts/revealjs/lib/js/head.min.js")
  script(src="/javascripts/revealjs/js/reveal.js")
- script(src='/javascripts/io.js')
- script(src='/javascripts/presentation.js')
+ script(src='/javascripts/build/presentation.js')
  
