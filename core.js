@@ -8,5 +8,13 @@ module.exports={
                 res.send(data);
             res.end();
         }
+    },
+    For: function(items,exec,init){
+        var result=undefined;
+        for(var i=init||0,length=items.length;i<length;i++)
+        {
+            result=exec(items[i],i);
+        }
+        return result;
     }
 };

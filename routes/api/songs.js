@@ -27,8 +27,6 @@ router.post('/search', function(req, res){
     });
     mongodb.Song.find({"_id":{$in: _ids  }},response(res));
 });
-
-
 router.post('/',function(req,res,next){
      var obj=getItem(req);
          obj.Views=0;

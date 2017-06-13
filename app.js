@@ -6,14 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var passport     = require('passport');
-var compression = require('compression');
+var compression  = require('compression');
 
-var index     = require('./routes/index');
-var users     = require('./routes/users');
-var api_users = require('./routes/api/users');
-var api_songs = require('./routes/api/songs');
-var api_lists = require('./routes/api/lists');
 var app       = express();
+
 app.use(compression());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,15 +28,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 var passportConfig = require('./passportConfig.js')(app,passport);
+var config_routes = require('./routes/config-routes.js')(app);
+
 //passport
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
-app.use('/', ensureAuthenticated,index);
-app.use('/users', users);
-app.use('/api/users',ensureAuthenticated ,api_users);
-app.use('/api/songs',ensureAuthenticated ,api_songs);
-app.use('/api/lists',ensureAuthenticated, api_lists);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

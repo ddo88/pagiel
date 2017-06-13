@@ -24,7 +24,12 @@
     background-color: #FFF;
     color: #000;
 }
-
+.hljs-addition, .hljs-comment, .hljs-quote, .hljs-meta {
+    color: #000;
+}
+.hljs-keyword, .hljs-selector-tag, .hljs-tag {
+    color: #000;
+}
 a.back {
     z-index: 9999;
     color: rgba(255,255,255,0.5);

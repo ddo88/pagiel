@@ -180,6 +180,7 @@ function Song(item,parent){
         _self.chords(val.Chords);
         _self.tipo(val.Type);
         _self.views(val.Views);
+        _self.tono(val.tono);
      }
     setData(item);
     _self.toItem   =function(){

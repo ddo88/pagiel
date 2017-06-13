@@ -4,28 +4,13 @@ function VM()
     var _self           = this;
     _self.currentList   = ko.observable();
     _self.files         = ko.observableArray();
-    _self.buscar        = function(){
-        try{
-            Reveal.destroy();
-        }catch(e){}
-        _self.files([]);
-        var ids = _.map(_self.currentList().Songs,function(x){ return x.id;});
-        var tonos = _.map(_self.currentList().Songs,function(x){ return x.tono;});
-        For(ids,function(item,i){
-            var data=getSync('/api/songs/'+item);
-            var song=new Song(data,_self);
-            song.tono(tonos[i]);
-            _self.files.push(song);//new Song(item,_self));
-        });
-        loadReveal();
-     };
     _self.init          = function(){
         _self.files([]);
-        get('/api/lists/current').done(function(list){
-            if(list.length){
-                _self.currentList(list[0]);
-                _self.buscar();
-            }
+        get('/api/lists/songs?properties=Chords,Name').done(function(data){
+            AsyncFor(data,function(d){
+                var song=new Song(d,_self);
+                _self.files.push(song);
+            }).done(loadReveal);
         });
       };
     _self.init();
@@ -33,11 +18,8 @@ function VM()
 }
 
 $(function(){
-    $('#parallax').remove();
     ko.applyBindings(new VM());
-    $('#header').hide();
 });
-
 
 function loadReveal(){
     Reveal.initialize({
@@ -91,6 +73,4 @@ var transposeChord   = function (chord, amount) {
     }catch(e){
         return "";
     }
-    //chord = subst.join("");
-    
 };

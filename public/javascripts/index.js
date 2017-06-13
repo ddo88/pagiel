@@ -1,14 +1,13 @@
 /// <reference path="core.js" />
 function indexVM()
 {
-    var _self=this;
-    _self.history=ko.observableArray([]);
-    _self.songsMostView=ko.observableArray([]);
-    _self.songsLessView=ko.observableArray([]);
-    // _self=paginator(_self,"history",3);
-    _self.pageSize  = ko.observable(3);
-    _self.pageIndex = ko.observable(0);
-    _self.init=function(){
+    var _self           = this;
+    _self.history       = ko.observableArray([]);
+    _self.songsMostView = ko.observableArray([]);
+    _self.songsLessView = ko.observableArray([]);
+    _self.pageSize      = ko.observable(3);
+    _self.pageIndex     = ko.observable(0);
+    _self.init          = function(){
         get('/api/songs/details?order=-1')
         .done(function(data){
             For(data,function(item){ 
@@ -43,7 +42,6 @@ function indexVM()
             });
         });
     };
-
     _self.init();
     return _self;
 }
