@@ -6,7 +6,8 @@ module.exports={
                 res.send({error:true,message:err});
             else
                 res.send(data);
-            res.end();
+            res.flush();    
+            //res.end();
         }
     },
     For: function(items,exec,init){

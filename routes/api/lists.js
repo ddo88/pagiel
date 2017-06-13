@@ -4,7 +4,7 @@ var router  = express.Router();
 var _       = require('underscore');
 var mongodb = require('../../mongoApi.js');
 var response= require('../../core.js').response;
-var For= require('../../core.js').For;
+var For     = require('../../core.js').For;
 
 /* get */
 router.get('/', function(req, res, next) {
@@ -16,49 +16,34 @@ router.get('/current',function(req,res,next){
 router.get('/songs',function(req,res,next){
     var props=null;
     if(req.query.properties)
-    {
         props=req.query.properties.split(',').join(" ");
-    }
     
-
     mongodb.List.find({ }).limit(1).exec(function(err,data){
         if(err)
             res.send({error:true,message:err});
         else
         {
-            /*
-            var q=_.map(list.aditionalData[0].Songs,function(i){return {id:i.id, tono:i.tono}; });
-           For(_.map(list.data,function(i){ 
-                var t  = _.filter(q,function(item){ return item.id==i["_id"];}); 
-                i.tono = t && t.length && t[0].tono;
-                return i
-            }),function(d){
-                var song=new Song(d,_self);
-                _self.files.push(song);
-            });
-             */
             var c=_.map(data[0].Songs,function(i){ return i.id; });
             var q=_.map(data[0].Songs,function(i){return {id:i.id, tono:i.tono}; });
             var _ids=_.map(c,function(o){ return mongoose.Types.ObjectId(o); });
-            //mongodb.Song.find({"_id":{$in: _ids  }},response(res));
+            function processData (err,data2){
+                if(err)
+                    res.send({error:true,message:err});
+                else
+                {
+                    data2 = JSON.parse(JSON.stringify(data2))
+                    For(data2,function(song){
+                            var t  = _.filter(q,function(item){ return item.id==song["_id"];}); 
+                            song.tono = t && t.length && t[0].tono;
+                    });
+                    res.send(data2);
+                }
+                res.end();
+            }
             if(props)
-                mongodb.Song.find({"_id":{$in: _ids  }},props,function (err,data2){
-                    if(err)
-                        res.send({error:true,message:err});
-                    else
-                    {
-                        data2 = JSON.parse(JSON.stringify(data2))
-                        For(data2,function(song){
-                                var t  = _.filter(q,function(item){ return item.id==song["_id"];}); 
-                                song.tono = t && t.length && t[0].tono;
-                        });
-                        res.send(data2);
-                    }
-                    
-                    res.end();
-                });
+                mongodb.Song.find({"_id":{$in: _ids  }},props,processData);
             else
-                mongodb.Song.find({"_id":{$in: _ids  }},response(res));
+                mongodb.Song.find({"_id":{$in: _ids  }},processData);
         }
     });
  });
