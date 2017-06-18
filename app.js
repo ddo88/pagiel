@@ -7,8 +7,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var passport     = require('passport');
 var compression  = require('compression');
-
-var app       = express();
+var app          = express();
 
 app.use(compression());
 // view engine setup
@@ -28,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 var passportConfig = require('./passportConfig.js')(app,passport);
-var config_routes = require('./routes/config-routes.js')(app);
+var config_routes  = require('./routes/config-routes.js')(app);
 
 //passport
 // uncomment after placing your favicon in /public

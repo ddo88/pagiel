@@ -3,7 +3,8 @@ var gulp       = require('gulp'),
     uglify     = require('gulp-uglify'),
     // minify     = require('gulp-minify'),
     concat_css = require('gulp-concat-css'),
-    clean_css  = require('gulp-clean-css');
+    clean_css  = require('gulp-clean-css'),
+    imageop = require('gulp-image-optimization');;
 
 gulp.task('compileJS', function () {
   gulp.src(['public/javascripts/core.js',
@@ -43,4 +44,14 @@ gulp.task('revealCSS',function(){
     .pipe(concat_css("revealAll.css"))
     .pipe(clean_css({compatibility: 'ie8'}))
     .pipe(gulp.dest('public/stylesheets/'));
+});
+
+gulp.task('compileIMG', function(cb) {
+    gulp.src(['public/images/*.jpg',
+    'public/theme/assets/img/*.jpg',
+    ]).pipe(imageop({
+        optimizationLevel: 5,
+        progressive: true,
+        interlaced: true
+    })).pipe(gulp.dest('public/images/build')).on('end', cb).on('error', cb);
 });
