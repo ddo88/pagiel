@@ -1,3 +1,7 @@
+* {
+    font-weight: 900 !important;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -42,3 +46,5 @@ li.k-button {
     background-image: none !important;
     content: "\0274c";
 }
+
+
