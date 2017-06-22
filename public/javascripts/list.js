@@ -109,6 +109,8 @@ function VM()
          window.location.href="/songs";
      }
     _self.init              = function(){
+
+        //$('#required').on('click',_.once(_self.initMultiselect));
         _self.initMultiselect();
         _self.files([]);
         _self.selectedFiles($("#required").data("kendoMultiSelect"));
@@ -125,6 +127,8 @@ function VM()
             }
         });
       };
+
+      
     _self.initMultiselect   = function(){
           $("#required").kendoMultiSelect({
             dataSource: { transport: { read: { dataType: "json", url: "/api/songs",}}},
@@ -134,7 +138,7 @@ function VM()
             change: _self.buscar,
             tagMode: "single",
             height:250,
-            maxSelectedItems: 8
+            maxSelectedItems: 10
         });
       };
     

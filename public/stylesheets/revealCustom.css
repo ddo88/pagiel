@@ -24,11 +24,9 @@
     background-color: #FFF;
     color: #000;
 }
-.hljs-addition, .hljs-comment, .hljs-quote, .hljs-meta {
+.hljs-keyword, .hljs-selector-tag, .hljs-tag, .hljs-built_in, .hljs-addition, .hljs-comment, .hljs-quote, .hljs-meta,.reveal pre code,.reveal code, .reveal h4 {
     color: #000;
-}
-.hljs-keyword, .hljs-selector-tag, .hljs-tag {
-    color: #000;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif !important; 
 }
 a.back {
     z-index: 9999;
