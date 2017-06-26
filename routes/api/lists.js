@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var router  = express.Router();
 var _       = require('underscore');
 var mongodb = require('../../mongoApi.js');
+var acl = require('../../acl.js');
 var response= require('../../core.js').response;
 var For     = require('../../core.js').For;
 
@@ -52,12 +53,14 @@ router.get('/:Id', function(req, res) {
      mongodb.List.findById(req.params.Id,response(res));
 });
 
+
 /* post */
 router.post('/',function(req,res,next){
      var obj  = getItem(req);
      var item = new mongodb.List(obj);
     item.save(response(res));
  });
+ //acl.middleware(3,acl.getUserId)
 router.post('/history',function(req,res,next){
     mongodb.List.find({ }).limit(1).exec(function (err,data){
         var q    = _.map(data[0].Songs,function(song){
@@ -72,7 +75,7 @@ router.post('/history',function(req,res,next){
 });
 /* put */
 router.put('/history',function(req,res,next){
-    mongodb.ListHistory.find({ }).skip(parseInt(req.body.pageIndex)).limit(parseInt(req.body.pageSize)).exec(response(res));
+    mongodb.ListHistory.find({ }).sort({Date:-1}).skip(parseInt(req.body.pageIndex)).limit(parseInt(req.body.pageSize)).exec(response(res));
  });
 router.put('/',function(req,res,next){
     var updateItem=getItem(req);

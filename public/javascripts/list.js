@@ -89,13 +89,15 @@ function VM()
          if(confirm("esta seguro de actualizar la lista?")){
             For(_.chain(_self.files()).map(function(q){ return q.id(); }).reduce(function(memo,current){ return memo+','+current;}).value().split(','),
             function(item){
-                updateItem("/api/songs/"+item,{}).done(function(data){
-                    //rev: validar alerts
-                    alert("se ha guardado correctamente la información");
-                   console.log(data);
-                });
+                 updateItem("/api/songs/"+item,{}).done(function(data){
+                     //rev: validar alerts
+                    console.log(data);
+                 });
             });
-            postItem("/api/lists/history",{}).done(function(){ console.log("update");});
+            postItem("/api/lists/history",{}).done(function(){
+                alert("se ha guardado correctamente la información");
+                console.log("update");
+            });
          }
      };
 
