@@ -17,3 +17,4 @@ section(id="faq",class="parallax section history")
                                     ul(data-bind="foreach:Songs")
                                         li
                                             span(data-bind="text:name")
+            button(class="btn btn-success btn-block",data-bind="click:function(){ seeMore();},visible:enableSeeMore") Ver más 

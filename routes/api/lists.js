@@ -75,7 +75,7 @@ router.post('/history',function(req,res,next){
 });
 /* put */
 router.put('/history',function(req,res,next){
-    mongodb.ListHistory.find({ }).sort({Date:-1}).skip(parseInt(req.body.pageIndex)).limit(parseInt(req.body.pageSize)).exec(response(res));
+    mongodb.ListHistory.find({ }).sort({Date:-1}).skip(parseInt(req.body.pageIndex)*parseInt(req.body.pageSize)).limit(parseInt(req.body.pageSize)).exec(response(res));
  });
 router.put('/',function(req,res,next){
     var updateItem=getItem(req);
