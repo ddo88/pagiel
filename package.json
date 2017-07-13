@@ -6,6 +6,9 @@
     "start": "node ./bin/www",
     "debug": "node --nolazy --debug-brk=5858 ./bin/www"
   },
+  "engines": {
+    "node": "6.11.1"
+  },
   "dependencies": {
     "acl": "^0.4.10",
     "body-parser": "~1.17.1",
