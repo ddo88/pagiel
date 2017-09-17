@@ -53,12 +53,11 @@ block content
                         spen(data-bind="text:lyrics",class="custom-tooltip-message",style="display:none;")
                       td
                         span(data-bind="text:tipo")
-                      td(class="hidden-xs hidden-sm")
+                      td
                         i(class="fa fa-arrow-up text-info pull-left",aria-hidden="true",data-bind="click:function(){Up();}",style="font-size:16px;")
                         i(class="fa fa-arrow-down text-info pull-left",aria-hidden="true",data-bind="click:function(){Down();}",style="font-size:16px;")
                         span(data-bind="text:tono",class="pull-left",style="min-width:10px;margin-right:5px;")
-                      td(class="hidden-xs hidden-sm")
-                        i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){$parent.down($data);}",style="font-size:16px;") &nbsp;&nbsp;
+                      td                        i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){$parent.down($data);}",style="font-size:16px;") &nbsp;&nbsp;
                         i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){$parent.up($data);}",style="font-size:16px;")
     
 
