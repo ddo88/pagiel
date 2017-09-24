@@ -43,3 +43,8 @@ textarea.form-control {
     background-color: #F9FAFD;
 
 }
+
+.history-row
+{
+        max-height: 290px;
+}
