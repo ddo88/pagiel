@@ -24,7 +24,7 @@ block content
                     th #
                     th(data-bind="click:function(){ setOrderBy('name');}") Canción
                     th(data-bind="click:function(){ setOrderBy('tipo');}",class="hidden-xs hidden-sm") Tipo
-                    th(data-bind="click:function(){ setOrderBy('views');}",class="hidden-xs hidden-sm") Vista
+                    th(data-bind="click:function(){ setOrderBy('views');}") Vista
                 tbody(data-bind='foreach:listOrdered')
                   tr
                     td 
@@ -33,7 +33,7 @@ block content
                       span(data-bind='text:name')
                     td(class="hidden-xs hidden-sm")
                       span(data-bind="text:tipo")
-                    td(class="hidden-xs hidden-sm")
+                    td
                       span(data-bind="text:views")
                     td
                       i(data-bind="css: getIcon()",aria-hidden="true")
