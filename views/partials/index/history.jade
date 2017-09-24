@@ -7,14 +7,5 @@ section(id="faq",class="parallax section history")
                         h3(class="section-title")
                             span(class="wow bounceInRight") historico
             .row(data-bind="foreach:history")
-                .col-md-4.col-sm-12
-                    div(class="faq-block wow bounceInDown",data-wow-duration="1.5s",data-wow-delay="0s")
-                        div(class="panel-group")
-                            div(class="panel panel-default")
-                                div(class="panel-heading")
-                                    h4(class="panel-title",data-bind="text:moment(Date()).format('YYYY-MM-DD')") demo
-                                div(class="panel-body")
-                                    ul(data-bind="foreach:Songs")
-                                        li
-                                            span(data-bind="text:name")
+                include historyRow.jade
             button(class="btn btn-success btn-block",data-bind="click:function(){ seeMore();},visible:enableSeeMore") Ver más 
