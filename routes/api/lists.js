@@ -81,7 +81,10 @@ router.put('/',function(req,res,next){
     var updateItem=getItem(req);
     mongodb.List.findOneAndUpdate({"_id":req.body.id},updateItem,response(res)) 
 });
-
+router.delete("/current",function(req,res,next){
+    mongodb.List.remove({}).exec(response(res));
+    //.remo .find({ }).limit(1).exec(response(res));
+});
 
 function getItem (req){
     var item={
