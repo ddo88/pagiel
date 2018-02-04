@@ -223,3 +223,95 @@ function List(item)
 $(function(){
     $('#Carousel').carousel();
 });
+
+
+(function() {
+    /*
+    Mouse/Touch Interactions as bindings for Knockout
+    Heavily inspired by Tap.js - https://github.com/alexgibson/tap.js
+    */
+    var hasTouch = 'ontouchstart' in window || 'createTouch' in document,
+        offsetX, offsetY;
+
+    function InteractionController( element, interactions ) {
+        this.element = element;
+        this.interactions = interactions || {};
+        element.addEventListener( hasTouch ? "touchstart" : "mousedown", this, false );
+    };
+    
+    InteractionController.prototype = {
+        start: function(event) {
+            if( hasTouch ) event = event.touches[0];
+            this.interactions.press(event);
+            if( this.interactions.move ) {
+                if( hasTouch ) {
+                    this.element.addEventListener( "touchmove", this, false );
+                } else {
+                    document.addEventListener( "mousemove", this, false );
+                }
+                this.interactions.move( event );
+            }
+            if( this.interactions.release ) {
+                if( hasTouch ) {
+                    this.element.addEventListener( "touchend", this, false );
+                } else {
+                    document.addEventListener( "mouseup", this, false );
+                }
+            }
+        },
+        move: function(event) {
+            if( hasTouch ) event = event.touches[0];
+            this.interactions.move( event );
+        },
+        end: function(event) {
+            var target = hasTouch ? this.element : document;
+            var endEvent = hasTouch ? "touchend" : "mouseup";
+            var moveEvent = hasTouch ? "touchmove" : "mousemove";
+            if( hasTouch ) event = event.touches[0];
+            this.interactions.release(event);
+            target.removeEventListener( endEvent, this, false );
+            target.removeEventListener( moveEvent, this, false );
+        },
+        handleEvent:function (event) {
+            event.preventDefault();
+            switch (event.type) {
+            case 'touchstart': this.start(event); break;
+            case 'touchmove': this.move(event); break;
+            case 'touchend': this.end(event); break;
+            //case 'touchcancel': this.cancel(e); break;
+            case 'mousedown': this.start(event); break;
+            case 'mousemove': this.move(event); break;
+            case 'mouseup': this.end(event); break;
+            }
+        }
+    };
+
+    function getInteractionController( element, interactions ) {
+        var controller = ko.utils.domData.get( element, "interactions" );
+        if( controller == undefined ) {
+            controller = new InteractionController( element, interactions )
+            ko.utils.domData.set( element, "interactions", controller );
+        }
+        return controller;
+    };
+
+    function createShortcutBinding( eventName ) {
+        ko.bindingHandlers[eventName] = {
+            init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+                var controller = getInteractionController( element );
+                controller.interactions[eventName] = valueAccessor();
+            }
+        }
+    };
+
+    ko.bindingHandlers.interaction = {
+        init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+            getInteractionController( element, valueAccessor() );
+        }
+    }
+
+    createShortcutBinding( "press" );
+    createShortcutBinding( "release" );
+    createShortcutBinding( "move" );
+    
+})();

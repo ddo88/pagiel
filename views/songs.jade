@@ -22,9 +22,9 @@ block content
                 thead
                   tr
                     th #
-                    th(data-bind="click:function(){ setOrderBy('name');}") Canción
-                    th(data-bind="click:function(){ setOrderBy('tipo');}",class="hidden-xs hidden-sm") Tipo
-                    th(data-bind="click:function(){ setOrderBy('views');}") Vista
+                    th(data-bind="press:function(){ setOrderBy('name');}, click:function(){ setOrderBy('name');}") Canción
+                    th(data-bind="press:function(){ setOrderBy('tipo');},click:function(){ setOrderBy('tipo');}",class="hidden-xs hidden-sm") Tipo
+                    th(data-bind="press:function(){ setOrderBy('views');},click:function(){ setOrderBy('views');}") Vista
                 tbody(data-bind='foreach:listOrdered')
                   tr
                     td 
@@ -43,6 +43,8 @@ block content
                       button(data-bind='click:showNotas',class="btn btn-success") Notas
                     td(class="hidden-xs hidden-sm")
                       button(data-bind='click:editSong',class="btn btn-warning") Editar
+                    td
+                      button(data-bind='click:addToList',class="btn btn-warning") + 
 
   include ../views/partials/songs/edit.jade
   include ../views/partials/songs/new.jade

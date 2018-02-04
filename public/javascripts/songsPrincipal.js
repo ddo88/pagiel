@@ -33,6 +33,11 @@ Song.prototype.editSong  = function(){
         this.parent.enableEdit(true);
         showModal("#edit",this.name(),600);
  };
+Song.prototype.addToList=function(){
+        postItem('/api/lists/current/AddSong',{id:this.id()}).done(function(data){
+            alert("ingresado");
+        });
+};
 Song.prototype.Save      = function(){
         postItem('/api/songs',this.toItem()).done(function(data){
             //parent.init();

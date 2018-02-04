@@ -73,6 +73,22 @@ router.post('/history',function(req,res,next){
         item.save(response(res));
     });
 });
+
+router.post('/current/AddSong',function(req,res,next){
+    mongodb.List.find({ }).limit(1).exec(function (err,data){
+        if(err){
+            res.send({error:true,message:err});
+            res.flush();  
+        }            
+        else
+            {
+            data[0].Songs.push({id:req.body.id,tono:0});
+            data[0].save(response(res));
+            }
+          
+        //res.end();
+    });
+})
 /* put */
 router.put('/history',function(req,res,next){
     mongodb.ListHistory.find({ }).sort({Date:-1}).skip(parseInt(req.body.pageIndex)*parseInt(req.body.pageSize)).limit(parseInt(req.body.pageSize)).exec(response(res));
