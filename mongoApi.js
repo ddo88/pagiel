@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 // Connect to MongoDB and create/use database called todoAppTest
 mongoose.connect( process.env.MongoConnectionString);
 //demo
+
 // Create a schema
 mongoApi.createSchemaUser        = function(){
     return new mongoose.Schema({
