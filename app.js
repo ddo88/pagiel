@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-var passportConfig = require('./passportConfig.js')(app,passport);
+// var passportConfig = require('./passportConfig.js')(app,passport);
 var config_routes  = require('./routes/config-routes.js')(app);
 var _acl            = require('./acl.js');
 app.get( '/allow/', function( request, response, next ) {
