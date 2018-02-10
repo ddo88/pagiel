@@ -14,6 +14,21 @@ router.get('/', function(req, res, next) {
 router.get('/current',function(req,res,next){
     mongodb.List.find({ }).limit(1).exec(response(res));
  });
+ router.post('/current/AddSong',function(req,res,next){
+    mongodb.List.find({ }).limit(1).exec(function (err,data){
+        if(err){
+            res.send({error:true,message:err});
+            res.flush();  
+        }            
+        else
+            {
+            data[0].Songs.push({id:req.body.id,tono:0});
+            data[0].save(response(res));
+            }
+          
+        //res.end();
+    });
+})
 router.get('/songs',function(req,res,next){
     var props=null;
     if(req.query.properties)

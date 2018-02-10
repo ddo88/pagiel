@@ -48,6 +48,11 @@ Song.prototype.Update    = function(){
 Song.prototype.Cancel    = function(){
     this.parent.clearSelected();
 };
+Song.prototype.addToList=function(){
+    postItem('/api/lists/current/AddSong',{id:this.id()}).done(function(data){
+        alert("ingresado");
+    });
+};
 
 function VM(){
     var _self=this;
