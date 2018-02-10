@@ -16,9 +16,9 @@ app.set('view engine', 'jade');
 
 app.use(cookieParser());
 app.use(session({ 
-  secret: 'keyboard cat'
+  secret: 'keyboard cat',
   // ,key: 'sid',
-  // resave: true,
+  resave: true
   // cookie: { secure: true }})
 }));
 app.use(logger('dev'));
