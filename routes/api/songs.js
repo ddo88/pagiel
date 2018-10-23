@@ -8,7 +8,7 @@ var mongodb= require('../../mongoApi.js');
 
 //var dropboxApi = new Dropbox({ accessToken: 'rQbx2WVaCCMAAAAAAAACM1737RJ_TBS3FWn65a9YzGq39MDNqUffbxyk_kgmBBQW' });
 router.get('/', function(req, res, next) {
-     mongodb.Song.find({}).sort({Name:1}).exec(response(res));
+    var q =mongodb.Song.find({} ,"Name Lyrics Chords Type Views",response(res));
 });
 // router.get('/all', function(req, res, next) {
 //     mongodb.Song.update({},{Views:0},{multi:true},response(res));

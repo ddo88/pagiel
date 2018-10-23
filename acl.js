@@ -1,7 +1,7 @@
 var acl            = require('acl'),
     mongoApi       = require('./mongoApi.js'),
     prefix          ="_acl",
-    _acl = new acl(new acl.mongodbBackend(mongoApi.db.connection.db, prefix));
+    _acl = new acl(new acl.mongodbBackend(mongoApi.db.connection, prefix));
     
 _acl.allow([{
                 roles: ['guest'],

@@ -2,11 +2,14 @@
 module.exports={
     response:function(res){
         return function (err,data){
+            //res.setHeader('Content-Type', 'application/json');
+            console.log(data);
             if(err)
                 res.send({error:true,message:err});
             else
-                res.send(data);
-            res.flush();    
+                res.json(data);
+                //res.send(data);
+            //res.flush();    
             //res.end();
         }
     },
