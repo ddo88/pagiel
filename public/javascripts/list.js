@@ -51,6 +51,15 @@ function VM()
     _self.down              = function(item){
         _self.processPosition(item,-1);
     };
+    _self.cleanList= function()
+    {
+        if(confirm("¿seguro de limpiar la lista?"))
+        {
+            _self.files([]);
+            _self.saveList();
+            location.reload();
+        }
+    }
     _self.buscar            = function(){
         _self.files([]);
         var ids=undefined;
@@ -69,19 +78,23 @@ function VM()
          
          if(confirm("¿esta seguro de guardar la información?"))
          {
-            var item={ data: JSON.stringify(_.map(_self.files(),function(item){ return {id:item.id(),tono:item.tono()}})) };
-            if(_self.currentList()){
-                item.id=_self.currentList()["_id"];
-                updateItem("/api/lists",item).done(function(data){
-                    //rev: validar alerts
-                    alert("se ha guardado correctamente la información");
-                });
-            }else
-                postItem('/api/lists',item).done(function(data){
-                    //rev: validar alerts
-                    alert("se ha guardado correctamente la información");
-                });
+            _self.saveList();
          }
+     };
+     _self.saveList = function()
+     {
+        var item={ data: JSON.stringify(_.map(_self.files(),function(item){ return {id:item.id(),tono:item.tono()}})) };
+        if(_self.currentList()){
+            item.id=_self.currentList()["_id"];
+            updateItem("/api/lists",item).done(function(data){
+                //rev: validar alerts
+                alert("se ha guardado correctamente la información");
+            });
+        }else
+            postItem('/api/lists',item).done(function(data){
+                //rev: validar alerts
+                alert("se ha guardado correctamente la información");
+            });
      };
 
      _self.UpdateSongsStatistics=function()

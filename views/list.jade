@@ -19,15 +19,19 @@ block content
                 tbody
                   tr
                     td 
-                      button(class="btn btn-primary btn-block",data-bind="click:function(){generar();}") Guardar
+                      button(class="btn btn-success btn-block",data-bind="click:function(){generar();}") Guardar
+                  tr
                     td
                       button(class="btn btn-primary btn-block",data-bind="click:function(){UpdateSongsStatistics();}") Actualizar estadisticas
                   tr
                     td
                       button(class="btn btn-success btn-block",data-bind="click:function(){goToPresentation();}") Ir a presentación
+                  tr
                     td
                       button(class="btn btn-warning btn-block",data-bind="click:function(){goToPresentationChords();}") Ir a Notas
-    
+                  tr
+                    td
+                      button(class="btn btn-info btn-block",data-bind="click:function(){cleanList();},event: { touchend: cleanList }") Limpiar lista
             .col-md-12
               div(id="list")
                 i(class="fa fa-refresh",aria-hidden="true",data-bind="click:function(){buscar();}")
