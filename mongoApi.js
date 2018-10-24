@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 //mongoose.set('toObject', { virtuals: true });
 mongoose.set('toJSON', { virtuals: true });
 // Connect to MongoDB and create/use database called todoAppTest
-
 mongoose.connect( process.env.MongoConnectionString, { useNewUrlParser: true });
 //demo
 

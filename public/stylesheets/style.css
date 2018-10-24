@@ -30,7 +30,7 @@ div#list {
 }
 
 li.k-button {
-    background-color: #8ebc00;
+    background-color: gray;
     color: #eae8e8;
 }
 
@@ -45,6 +45,13 @@ li.k-button {
 .ui-button .ui-icon {
     background-image: none !important;
     content: "\0274c";
+}
+
+
+.alert-success, .btn-success, .label-success {
+    background-color: #2ECC40 !important;
+    border-color: #2ECC40 !important;
+    color: #1e2024 !important;
 }
 
 

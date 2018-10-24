@@ -5,16 +5,16 @@ block content
       div(class="parallax-overlay",style="background-color: #01b0d1;opacity:0.9;")
       .container
         .row
-          .col-md-12
+          .col-md-12.col-sm-12
             .maintitle
               h3.section-title
                 strong Lista
-          .col-md-12
-            .col-md-6
+          .col-md-12.col-sm-12
+            .col-md-6.col-sm-6
               .form-group
                 label Canciones
                 select(id="required",multiple="multiple")
-            .col-md-6
+            .col-md-6.col-sm-6
               table(class="options pull-right")
                 tbody
                   tr
@@ -32,10 +32,10 @@ block content
                   tr
                     td
                       button(class="btn btn-info btn-block",data-bind="click:function(){cleanList();},event: { touchend: cleanList }") Limpiar lista
-            .col-md-12
-              div(id="list")
-                i(class="fa fa-refresh",aria-hidden="true",data-bind="click:function(){buscar();}")
-                table.table
+      .container  
+        .row
+          .col-md-12
+            table.table
                   thead
                     tr
                       th
