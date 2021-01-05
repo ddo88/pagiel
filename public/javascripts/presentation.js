@@ -65,6 +65,9 @@ function loadReveal(){
         progress: true,
         history: true,
         center: true,
+        zoomKey: "alt",
+        width: "100%",
+	    height: "100%",
         transition: 'slide', // none/fade/slide/convex/concave/zoom
         dependencies: [
             { src: '/javascripts/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },

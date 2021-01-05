@@ -7,7 +7,7 @@ var passport       = require('passport');
 var session        = require('express-session');
 var configAuth     = require('./configAuth.js');
 var mongoApi       = require('./mongoApi.js');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 module.exports = function(app,passport) {
 
@@ -35,7 +35,9 @@ module.exports = function(app,passport) {
     passport.use(new GoogleStrategy({
         clientID        : configAuth.googleAuth.clientID,
         clientSecret    : configAuth.googleAuth.clientSecret,
-        callbackURL     : configAuth.googleAuth.callbackURL,},function(token, refreshToken, profile, done) {
+        callbackURL     : configAuth.googleAuth.callbackURL,
+        },
+        function(token, refreshToken, profile, done) {
 
         // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google
