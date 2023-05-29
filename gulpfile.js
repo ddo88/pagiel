@@ -2,20 +2,22 @@ var gulp       = require('gulp'),
     concat     = require('gulp-concat'),
     uglify     = require('gulp-uglify'),
     // minify     = require('gulp-minify'),
-    concat_css = require('gulp-concat-css'),
+    concat_css = require('@fomantic/gulp-concat-css'),
     clean_css  = require('gulp-clean-css'),
     imageop = require('gulp-image-optimization');;
 
-gulp.task('compileJS', function () {
+gulp.task('compileJS', function (done) {
   gulp.src(['public/javascripts/core.js',
             'public/javascripts/io.js'])
   .pipe(concat('all.js'))
   .pipe(uglify())
   .pipe(gulp.dest('public/javascripts/build/'))
+
+  done();
 });
 
 
-gulp.task('minifyJS', function () {
+gulp.task('minifyJS', async function (done) {
   gulp.src(['public/javascripts/index.js',
             'public/javascripts/presentation.js',
             'public/javascripts/presentationChords1.js',
@@ -23,9 +25,11 @@ gulp.task('minifyJS', function () {
             'public/javascripts/list.js'])
   .pipe(uglify())
   .pipe(gulp.dest('public/javascripts/build/'))
+
+  done();
 });
 
-gulp.task('compileCSS',function(){
+gulp.task('compileCSS',async function(done){
     
     gulp.src(['public/theme/assets/css/style.css',
               'public/stylesheets/custom.css',
@@ -33,9 +37,11 @@ gulp.task('compileCSS',function(){
     .pipe(concat_css("all.css"))
     .pipe(clean_css({compatibility: 'ie8'}))
     .pipe(gulp.dest('public/stylesheets/'));
+
+    done();
 });
 
-gulp.task('revealCSS',function(){
+gulp.task('revealCSS',async function(done){
     
     gulp.src(['public/javascripts/revealjs/css/reveal.css',
               'public/javascripts/revealjs/css/theme/white.css',
@@ -44,6 +50,7 @@ gulp.task('revealCSS',function(){
     .pipe(concat_css("revealAll.css"))
     .pipe(clean_css({compatibility: 'ie8'}))
     .pipe(gulp.dest('public/stylesheets/'));
+    done();
 });
 
 gulp.task('compileIMG', function(cb) {

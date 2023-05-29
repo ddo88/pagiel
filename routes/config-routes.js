@@ -4,7 +4,7 @@ var api       = require('./api.js');
 
 module.exports = function(app) {
 
-    app.use('/api',api);
+    app.use('/api',ensureAuthenticated,api);
     app.use('/', ensureAuthenticated,index);
     app.use('/',index);
     app.use('/users', users);

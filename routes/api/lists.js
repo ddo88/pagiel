@@ -1,11 +1,9 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var router  = express.Router();
-var _       = require('underscore');
+var _       = require('lodash');
 var mongodb = require('../../mongoApi.js');
-var acl = require('../../acl.js');
-var response= require('../../core.js').response;
-var For     = require('../../core.js').For;
+const { response, For } = require('../../core.js');
 
 /* get */
 router.get('/', function(req, res, next) {
@@ -60,7 +58,7 @@ router.post('/',function(req,res,next){
      var item = new mongodb.List(obj);
     item.save(response(res));
  });
- //acl.middleware(3,acl.getUserId)
+ 
 router.post('/history',function(req,res,next){
     mongodb.List.find({ }).limit(1).exec(function (err,data){
         var q    = _.map(data[0].Songs,function(song){

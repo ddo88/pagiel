@@ -1,0 +1,5 @@
+div(id="lyrics",data-bind="visible:enableLyrics,with:currentFile",class="overAll")
+    .form-group
+        label Letra
+        textarea(name="letra",data-bind="value:lyrics",class="form-control")
+    button(data-bind="click:Cancel",class="btn btn-danger") Cancelar

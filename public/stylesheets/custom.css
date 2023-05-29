@@ -47,4 +47,10 @@ textarea.form-control {
 .history-row
 {
         max-height: 290px;
+        min-height: 290px;
+}
+
+.history-row .panel-body
+{
+    min-height: 218px;
 }
