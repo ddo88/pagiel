@@ -10,6 +10,12 @@ div(id="edit",data-bind="visible:enableEdit",class="overAll")
             label Notas
             textarea(name="notas",data-bind="value:chords",class="form-control")
         .form-group
+            label Notas Guitarra
+            textarea(name="notas",data-bind="value:chordsGuitar",class="form-control")
+        .form-group
+            label Notas Bajo
+            textarea(name="notas",data-bind="value:chordsBass",class="form-control")
+        .form-group
             lable Tipo
             select(data-bind="value:tipo")
                 option(value="") seleccione

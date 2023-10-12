@@ -54,3 +54,8 @@ textarea.form-control {
 {
     min-height: 218px;
 }
+
+a.presentation_link {
+    z-index: 999;
+    color: black;
+}

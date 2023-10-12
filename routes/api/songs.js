@@ -8,7 +8,8 @@ var mongodb= require('../../mongoApi.js');
 
 
 router.get('/', function(req, res, next) {
-    var q =mongodb.Song.find({} ,"Name Lyrics Chords Type Views",response(res));
+    debugger;
+    var q =mongodb.Song.find({} ,"Name Lyrics Chords ChordsGuitar ChordsBass Type Views",response(res));
 });
 
 router.get('/details',function(req,res,next){
@@ -46,6 +47,8 @@ function getItem(req){
     return {
         Lyrics: req.body.lyrics,
         Chords: req.body.chords,
+        ChordsGuitar : req.body.chordsGuitar,
+        ChordsBass : req.body.chordsBass,
         Name:   req.body.name,
         Type:   req.body.type
     }

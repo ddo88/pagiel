@@ -1,9 +1,30 @@
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
 function VM()
 {
+    var type=getParameterByName('type');
+    // const urlParams = new URLSearchParams(window.location.search);
+    // var type=urlParams.get('type');
     var _self           = this;
     _self.currentList   = ko.observable();
     _self.files         = ko.observableArray();
+    _self.chordType     = ko.observable(type??"piano");
+    _self.isPiano = ko.computed(function(){
+        return this.chordType() ==='piano';
+    },_self);
+    _self.isBass = ko.computed(function(){
+        return this.chordType() ==='bass';
+    },_self);
+    _self.isGuitar = ko.computed(function(){
+        return this.chordType() ==='guitar';
+    },_self);
     _self.buscar        = function(){
         try{
             Reveal.destroy();

@@ -24,6 +24,8 @@ mongoApi.createSchemaSong        = function(){
         Name: String,
         Lyrics: String,
         Chords: String,
+        ChordsGuitar: String,
+        ChordsBass: String,
         Type:String,
         Views:Number
     });
