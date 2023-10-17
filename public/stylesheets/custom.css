@@ -47,4 +47,37 @@ textarea.form-control {
 .history-row
 {
         max-height: 290px;
+        min-height: 290px;
+}
+
+/* .history-row .panel-body
+{
+    min-height: 218px;
+} */
+
+/* a.presentation_link {
+    z-index: 999;
+    color: gray;
+    font-size: 20px;
+    margin: 0 2px;
+} */
+
+
+/* .panel-body
+{
+    min-height: 217px !important;
+}
+
+.faq-block {
+    min-height: 325px !important;
+} */
+
+.faq-block {
+    max-height: 283px !important;
+}
+
+.panel-body {
+    max-height: 225px !important;
+    overflow: auto;
+    min-height: 225px;
 }

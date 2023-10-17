@@ -1,0 +1,12 @@
+section(id="faq",class="parallax section history")
+    .wrapsection
+        .container
+            .row
+                .col-md-12.sol-sm-12
+                    .maintitle
+                        h3(class="section-title")
+                            span(class="wow bounceInRight") historico
+            .row(data-bind="foreach:history")
+                include historyRow.pug
+            .row
+                button(class="btn btn-success btn-block",data-bind="click:function(){ seeMore();},visible:enableSeeMore") Ver más 

@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 //mongoose.set('toObject', { virtuals: true });
 mongoose.set('toJSON', { virtuals: true });
 // Connect to MongoDB and create/use database called todoAppTest
-mongoose.connect( process.env.MongoConnectionString, { useNewUrlParser: true });
+mongoose.connect( process.env.MongoConnectionString, { useNewUrlParser: true, useUnifiedTopology:true });
 //demo
 
 // Create a schema
@@ -24,6 +24,8 @@ mongoApi.createSchemaSong        = function(){
         Name: String,
         Lyrics: String,
         Chords: String,
+        ChordsGuitar: String,
+        ChordsBass: String,
         Type:String,
         Views:Number
     });

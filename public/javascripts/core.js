@@ -166,6 +166,8 @@ function Song(item,parent){
     _self.name   = ko.observable();
     _self.lyrics = ko.observable();
     _self.chords = ko.observable();
+    _self.chordsGuitar = ko.observable();
+    _self.chordsBass = ko.observable();
     _self.tipo   = ko.observable();
     _self.views  = ko.observable();
     _self.tono   = ko.observable(0);
@@ -178,6 +180,8 @@ function Song(item,parent){
         _self.name(val.Name);
         _self.lyrics(val.Lyrics);
         _self.chords(val.Chords);
+        _self.chordsGuitar(val.ChordsGuitar);
+        _self.chordsBass(val.ChordsBass);
         _self.tipo(val.Type);
         _self.views(val.Views);
         _self.tono(val.tono);
@@ -187,6 +191,8 @@ function Song(item,parent){
         var obj={
             lyrics:_self.lyrics(),
             chords:_self.chords(),
+            chordsGuitar:_self.chordsGuitar(),
+            chordsBass:_self.chordsBass(),
             name:  _self.name(),
             type:  _self.tipo()
             //views: _self.views()

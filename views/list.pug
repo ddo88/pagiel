@@ -1,0 +1,70 @@
+extends layout
+block content
+  section(id="about",class="parallax section",style="background-image: url(http://themepush.com/demo/runcharity/assets/img/1.jpg);")
+    .wrapsection
+      div(class="parallax-overlay",style="background-color: #01b0d1;opacity:0.9;")
+      .container
+        .row
+          .col-md-12.col-sm-12
+            .maintitle
+              h3.section-title
+                strong Lista
+          .col-md-12.col-sm-12
+            .col-md-6.col-sm-6
+              .form-group
+                label Canciones
+                select(id="required",multiple="multiple")
+            .col-md-6.col-sm-6
+              table(class="options pull-right")
+                tbody
+                  tr
+                    td 
+                      button(class="btn btn-success btn-block",data-bind="click:function(){generar();}") Guardar
+                  tr
+                    td
+                      button(class="btn btn-primary btn-block",data-bind="click:function(){UpdateSongsStatistics();}") Actualizar estadisticas
+                  tr
+                    td
+                      button(class="btn btn-success btn-block",data-bind="click:function(){goToPresentation();}") Ir a presentación
+                  tr
+                    td
+                      button(class="btn btn-warning btn-block",data-bind="click:function(){goToPresentationChords();}") Ir a Notas
+                  tr
+                    td
+                      button(class="btn btn-info btn-block",data-bind="click:function(){cleanList();},event: { touchend: cleanList }") Limpiar lista
+      .container  
+        .row
+          .col-md-12
+            table.table
+                  thead
+                    tr
+                      th
+                        span #
+                      th
+                        span Nombre
+                      th
+                        span Tipo
+                      th
+                        span Tono
+                      th
+                        span Position
+                  tbody(data-bind='foreach:files,visible: files().length')
+                    tr
+                      td
+                        span(data-bind="text:($index()+1)")
+                      td(class="custom-tooltip")
+                        span(data-bind="text:name")
+                        spen(data-bind="text:lyrics",class="custom-tooltip-message",style="display:none;")
+                      td
+                        span(data-bind="text:tipo")
+                      td
+                        i(class="fa fa-arrow-up text-info pull-left",aria-hidden="true",data-bind="click:function(){Up();}",style="font-size:16px;")
+                        i(class="fa fa-arrow-down text-info pull-left",aria-hidden="true",data-bind="click:function(){Down();}",style="font-size:16px;")
+                        span(data-bind="text:tono",class="pull-left",style="min-width:10px;margin-right:5px;")
+                      td
+                        i(class="fa fa-arrow-up text-info",aria-hidden="true",data-bind="click:function(){$parent.down($data);}",style="font-size:16px;") &nbsp;&nbsp;
+                        i(class="fa fa-arrow-down text-info",aria-hidden="true",data-bind="click:function(){$parent.up($data);}",style="font-size:16px;")
+    
+
+block scripts
+ script(src='/javascripts/build/list.js')

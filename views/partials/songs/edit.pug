@@ -1,0 +1,25 @@
+div(id="edit",data-bind="visible:enableEdit",class="overAll")
+    form(data-bind="with:currentFile")
+        .form-group
+            label Nombre
+            input(name="nombre",type="text",data-bind="value:name",class="form-control")
+        .form-group
+            label letra
+            textarea(name="letra",data-bind="value:lyrics",class="form-control")
+        .form-group
+            label Notas
+            textarea(name="notas",data-bind="value:chords",class="form-control")
+        .form-group
+            label Notas Guitarra
+            textarea(name="notas",data-bind="value:chordsGuitar",class="form-control")
+        .form-group
+            label Notas Bajo
+            textarea(name="notas",data-bind="value:chordsBass",class="form-control")
+        .form-group
+            lable Tipo
+            select(data-bind="value:tipo")
+                option(value="") seleccione
+                option(value="Adoracion") Adoración
+                option(value="Alabanza") Alabanza
+        button(data-bind="click:Update",class="btn btn-primary") Guardar
+        button(data-bind="click:Cancel",class="btn btn-danger") Cancelar

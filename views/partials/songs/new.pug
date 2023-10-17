@@ -1,0 +1,20 @@
+div(id="new",data-bind="visible:enableNew",class="overAll")
+    form(data-bind="with:currentFile")
+        .form-group
+            label Nombre
+            input(name="nombre",type="text",data-bind="value:name",class="form-control")
+        .form-group
+            label Letra
+            textarea(name="letra",data-bind="value:lyrics",class="form-control")
+        .form-group
+            label Notas
+            textarea(name="notas",data-bind="value:chords",class="form-control")
+        .form-group
+            label Notas Guitarra
+            textarea(name="notas",data-bind="value:chordsGuitar",class="form-control")
+        .form-group
+            label Notas Bajo
+            textarea(name="notas",data-bind="value:chordsBass",class="form-control")            
+      
+        button(data-bind="click:Save",class="btn btn-primary") Guardar
+        button(data-bind="click:Cancel",class="btn btn-danger") Cancelar

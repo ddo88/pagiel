@@ -1,18 +1,17 @@
-var express = require('express');
-var router = express.Router();
+var express  = require('express');
+var router   = express.Router();
 var mongoose = require('mongoose');
-var response= require('../../core.js').response;
-var _ = require('underscore');
+var response = require('../../core.js').response;
+var _        = require('lodash');
 
 var mongodb= require('../../mongoApi.js');
 
-//var dropboxApi = new Dropbox({ accessToken: 'rQbx2WVaCCMAAAAAAAACM1737RJ_TBS3FWn65a9YzGq39MDNqUffbxyk_kgmBBQW' });
+
 router.get('/', function(req, res, next) {
-    var q =mongodb.Song.find({} ,"Name Lyrics Chords Type Views",response(res));
+    debugger;
+    var q =mongodb.Song.find({} ,"Name Lyrics Chords ChordsGuitar ChordsBass Type Views",response(res));
 });
-// router.get('/all', function(req, res, next) {
-//     mongodb.Song.update({},{Views:0},{multi:true},response(res));
-// });
+
 router.get('/details',function(req,res,next){
     var ord=parseInt(req.query.order||1);
     mongodb.Song.find({}).sort({Views:ord}).limit(5).exec(response(res));
@@ -48,9 +47,10 @@ function getItem(req){
     return {
         Lyrics: req.body.lyrics,
         Chords: req.body.chords,
+        ChordsGuitar : req.body.chordsGuitar,
+        ChordsBass : req.body.chordsBass,
         Name:   req.body.name,
         Type:   req.body.type
     }
 }
-
 module.exports = router;
