@@ -8,4 +8,5 @@ section(id="faq",class="parallax section history")
                             span(class="wow bounceInRight") historico
             .row(data-bind="foreach:history")
                 include historyRow.pug
-            button(class="btn btn-success btn-block",data-bind="click:function(){ seeMore();},visible:enableSeeMore") Ver más 
+            .row
+                button(class="btn btn-success btn-block",data-bind="click:function(){ seeMore();},visible:enableSeeMore") Ver más 

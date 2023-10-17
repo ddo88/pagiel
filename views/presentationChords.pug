@@ -6,9 +6,9 @@ block css
  link(rel="stylesheet",href="/stylesheets/revealCustom.css")
 block content
     .reveal
-        a(href="/list",class="presentation_link") Volver
-        a(href="/presentationChords",class="presentation_link") Piano
-        a(href="/presentationChords?type=bass",class="presentation_link") Bass
+        a(href="/list",class="presentation_link") Volver | 
+        a(href="/presentationChords",class="presentation_link") Piano | 
+        a(href="/presentationChords?type=bass",class="presentation_link") Bass | 
         a(href="/presentationChords?type=guitar",class="presentation_link") Guitar
         div(data-bind="if: isPiano()")
             .slides(data-bind='foreach:files,visible: files().length')
