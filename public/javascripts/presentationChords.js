@@ -36,7 +36,15 @@ function VM()
             var data=getSync('/api/songs/'+item);
             var song=new Song(data,_self);
             song.tono(tonos[i]);
-            _self.files.push(song);//new Song(item,_self));
+            if(_self.isPiano())
+                song.chords(transposeChord(song.chords(),song.tono()))
+            else{
+                if(_self.isBass())
+                    song.chords(transposeChord(song.chordsBass()??"",song.tono()))
+                else
+                    song.chords(transposeChord(song.chordsGuitar()??"",song.tono()))
+            }
+            _self.files.push(song);
         });
         loadReveal();
      };
