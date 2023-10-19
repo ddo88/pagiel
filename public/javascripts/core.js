@@ -321,3 +321,7 @@ $(function(){
     createShortcutBinding( "move" );
     
 })();
+
+$("a.presentation_link").on("touchend", function(event) {
+    window.location.href = $(this).attr("href");
+  });
