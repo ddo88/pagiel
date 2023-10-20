@@ -64,16 +64,18 @@ function VM()
 $(function(){
     $('#parallax').remove();
     ko.applyBindings(new VM());
+   
     $('#header').hide();
 });
 
 
-function loadReveal(){
+function loadReveal()
+{
     Reveal.initialize({
         controls: true,
         progress: true,
         history: true,
-        center: true,
+        //center: true,
         transition: 'slide', // none/fade/slide/convex/concave/zoom
         dependencies: [
             { src: '/javascripts/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -83,7 +85,7 @@ function loadReveal(){
             { src: '/javascripts/revealjs/plugin/zoom-js/zoom.js', async: true },
             { src: '/javascripts/revealjs/plugin/notes/notes.js', async: true }
         ]
-    });	
+    });
 }
 
 
