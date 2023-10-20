@@ -1,5 +1,4 @@
 function getParameterByName(name, url = window.location.href) {
-    alert(url);
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
         results = regex.exec(url);
@@ -11,7 +10,6 @@ function getParameterByName(name, url = window.location.href) {
 function VM()
 {
     var type=getParameterByName('type');
-    alert(type);
     // const urlParams = new URLSearchParams(window.location.search);
     // var type=urlParams.get('type');
     var _self           = this;
