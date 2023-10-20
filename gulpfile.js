@@ -20,7 +20,7 @@ gulp.task('compileJS', function (done) {
 gulp.task('minifyJS', async function (done) {
   gulp.src(['public/javascripts/index.js',
             'public/javascripts/presentation.js',
-            'public/javascripts/presentationChords1.js',
+            'public/javascripts/presentationChords.js',
             'public/javascripts/songsPrincipal.js',
             'public/javascripts/list.js'])
   .pipe(uglify())
@@ -46,7 +46,7 @@ gulp.task('revealCSS',async function(done){
     gulp.src(['public/javascripts/revealjs/css/reveal.css',
               'public/javascripts/revealjs/css/theme/white.css',
               'public/javascripts/revealjs/lib/css/zenburn.css',
-              'public//stylesheets/revealCustom.css'])
+              'public/stylesheets/revealCustom.css'])
     .pipe(concat_css("revealAll.css"))
     .pipe(clean_css({compatibility: 'ie8'}))
     .pipe(gulp.dest('public/stylesheets/'));

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prestart": "gulp compileJS && gulp minifyJS && gulp compileCSS",
     "start": "node server.js",
     "debug": "node --nolazy --inspect-brk=5858 ./bin/www"
   },
