@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-
+let appInsights = require('applicationinsights');
+appInsights.setup("InstrumentationKey=cec3b5c9-778e-43d3-9707-0a8d66e73c25;IngestionEndpoint=https://centralus-2.in.applicationinsights.azure.com/;LiveEndpoint=https://centralus.livediagnostics.monitor.azure.com/").start();
 var app = require('./app')
 var debug = require('debug')('demo-db-api:server');
 var http = require('http');

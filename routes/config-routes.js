@@ -11,6 +11,7 @@ module.exports = function(app) {
 
 
     function ensureAuthenticated(req, res, next) {
+        //return next();
         if (req.isAuthenticated()) { return next(); }
         res.redirect('/auth/login');
     }

@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "watch":"nodemon server.js",
+    "watch": "nodemon server.js",
     "prestart": "gulp compileJS && gulp minifyJS && gulp compileCSS",
     "start": "node server.js",
     "debug": "node --nolazy --inspect-brk=5858 ./bin/www"
   },
   "dependencies": {
+    "applicationinsights": "^2.9.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "dotenv": "^16.0.3",

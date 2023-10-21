@@ -22,7 +22,7 @@ app.use(cookieParser());
 //passport
 require('./passportConfig.js')(app);
 //acl
-require('./acl.js')(app);
+//require('./acl.js')(app);
 //routes
 require('./routes/config-routes.js')(app);
 
