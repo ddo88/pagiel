@@ -26,11 +26,13 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+      - name: Install 7-Zip
+        run: |
+          choco install 7zip -y
+
       - name: Create ZIP artifact
         run: |
-          # Comprime todos los archivos en un ZIP
-          zip -r node-app.zip .      
+          7z a -r -tzip node-app.zip .      
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
