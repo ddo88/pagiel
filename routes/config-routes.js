@@ -9,7 +9,6 @@ module.exports = function(app) {
     app.use('/',index);
     app.use('/users', users);
 
-
     function ensureAuthenticated(req, res, next) {
         //return next();
         if (req.isAuthenticated()) { return next(); }
