@@ -153,7 +153,7 @@ function VM()
             change: _self.buscar,
             tagMode: "single",
             height:250,
-            maxSelectedItems: 10
+            maxSelectedItems: 30
         });
       };
     
